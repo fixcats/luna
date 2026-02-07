@@ -444,7 +444,16 @@
         left: 50%;
         transform: translateX(-50%);
         font-size: small
-      }  
+      }
+    @media (max-width: 820px) {
+      .logo-main {
+        font-size: 22px; /* было 28px на десктопе */
+      }
+      
+      .logo-sub {
+        font-size: 9px;  /* было 10px на десктопе */
+      }
+    }
 
       .header-inner {
         grid-template-columns: auto 1fr auto;
@@ -771,5 +780,6 @@
 
 </body>
 </html>
+
 
 
