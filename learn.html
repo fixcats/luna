@@ -5,8 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LUNAVEK — Learn More</title>
 
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Didot&display=swap" rel="stylesheet">
 
+  <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
@@ -252,7 +254,6 @@
       text-align: center;
       max-width: 720px;
       margin: auto;
-      margin-bottom: -40px; /* Немного подтянул к карточкам */
     }
 
     .section-head h1 {
@@ -268,14 +269,11 @@
       line-height: 1.7;
     }
 
-    /* ================= FEATURE GRID (ИЗМЕНЕНО) ================= */
-    /* Теперь это вертикальный стек, а не сетка из 3 колонок */
+    /* ================= FEATURE GRID ================= */
     .feature-grid {
-      display: flex;
-      flex-direction: column;
-      align-items: center; /* Центрируем карточки */
-      gap: 30px;
-      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
     }
 
     .feature-card {
@@ -284,11 +282,6 @@
       border-radius: 24px;
       padding: 36px 30px;
       box-shadow: 0 30px 60px rgba(0,0,0,.15);
-      
-      /* Ограничиваем ширину для читабельности */
-      width: 100%;
-      max-width: 600px; 
-      text-align: center; /* Центрируем текст внутри для красоты */
     }
 
     .feature-card h3 {
@@ -326,8 +319,6 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 28px;
-      /* Обеспечивает одинаковую высоту строк */
-      grid-auto-rows: 1fr; 
     }
 
     .mode-card {
@@ -336,10 +327,6 @@
       border-radius: 22px;
       padding: 26px 24px;
       box-shadow: 0 24px 50px rgba(0,0,0,.15);
-      /* Растягиваем карточку на всю высоту ячейки */
-      height: 100%; 
-      display: flex;
-      flex-direction: column;
     }
 
     .mode-card h3 {
@@ -352,7 +339,6 @@
       font-size: 13.5px;
       line-height: 1.65;
       color: var(--muted);
-      margin-top: auto; /* Если нужно, чтобы текст был вверху, уберите это. Сейчас это просто заполняет пространство */
     }
 
     /* ================= LEVELS ================= */
@@ -362,7 +348,6 @@
       gap: 26px;
       max-width: 900px;
       margin: auto;
-      grid-auto-rows: 1fr;
     }
 
     .level-card {
@@ -372,11 +357,6 @@
       padding: 30px 24px;
       text-align: center;
       box-shadow: 0 24px 50px rgba(0,0,0,.15);
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
     }
 
     .level-card h4 {
@@ -405,7 +385,7 @@
 
     /* ================= RESPONSIVE ================= */
     @media (max-width: 1024px) {
-      /* Для feature-grid больше не нужно менять колонки, так как она всегда в 1 колонку */
+      .feature-grid { grid-template-columns: 1fr 1fr; }
       .modes-grid { grid-template-columns: 1fr 1fr; }
     }
 
@@ -420,7 +400,6 @@
       }
 
       .logo-main {
-        font-family: "Didot", serif;
         font-size: 22px;
       }
 
@@ -430,6 +409,12 @@
       }
 
       .theme-btn { display: none; }
+
+      /* 🔥 MOBILE LAYOUT FIXES (THIS IS WHAT YOU ASKED) */
+      .feature-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
 
       .modes-grid {
         grid-template-columns: 1fr 1fr;
@@ -467,14 +452,16 @@
     }
 
     @media (max-width: 480px) {
-      /* Feature grid уже адаптирован (flex column) */
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
 
       .modes-grid {
-        grid-template-columns: 1fr; /* На очень маленьких экранах моды лучше в 1 колонку */
+        grid-template-columns: 1fr 1fr;
       }
 
       .levels-grid {
-        grid-template-columns: 1fr; /* Уровни тоже */
+        grid-template-columns: repeat(3, 1fr);
       }
     }
 
@@ -500,6 +487,7 @@
 </head>
 <body class="dark">
 
+<!-- ================= HEADER ================= -->
 <header>
   <div class="header-inner">
 
@@ -538,6 +526,7 @@
   </div>
 </header>
 
+<!-- ================= MOBILE MENU ================= -->
 <div class="mobile-menu" id="mobileMenu">
 
   <div class="mobile-top">
@@ -566,8 +555,10 @@
 
 <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
+<!-- ================= PAGE CONTENT ================= -->
 <main class="page">
 
+  <!-- INTRO -->
   <section class="section-head">
     <h1>Learn More</h1>
     <p>
@@ -575,6 +566,7 @@
     </p>
   </section>
 
+  <!-- FEATURES -->
   <section class="feature-grid">
     <div class="feature-card">
       <h3>Thoughtfully Designed for Skin Comfort</h3>
@@ -598,6 +590,7 @@
     </div>
   </section>
 
+  <!-- MODES -->
   <section class="modes-section">
     <h2>Tailored Facial Care For You</h2>
     <p>
@@ -639,6 +632,7 @@
     </div>
   </section>
 
+  <!-- LEVELS -->
   <section class="levels-section">
     <h2>Three Levels of Dimming</h2>
     <p>Adjusted to your heart’s content.</p>
@@ -661,6 +655,7 @@
     </div>
   </section>
 
+  <!-- DISCLAIMER -->
   <p class="disclaimer">
     *For cosmetic use only. Individual results may vary. This product is not intended to diagnose, treat, cure, or prevent any disease.
   </p>
@@ -703,4 +698,6 @@
 
 </body>
 </html>
+
+
 
