@@ -522,11 +522,11 @@
 
       <!-- LANGUAGE -->
       <div class="lang-wrapper">
-        <button class="Lang-btn" onclick="toggleLangMenu()" id="LangBtn">🇺🇸</button>
+        <button class="Lang-btn" onclick="toggleLangMenu()" id="LangBtn">EN</button>
         <div class="lang-menu" id="langMenu">
-          <button onclick="setLang('en')">🇺🇸 English</button>
-          <button onclick="setLang('fr')">🇫🇷 Français</button>
-          <button onclick="setLang('ar')">🇸🇦 العربية</button>
+          <button onclick="setLang('en')">EN English</button>
+          <button onclick="setLang('fr')">FR Français</button>
+          <button onclick="setLang('ar')">AR العربية</button>
         </div>
       </div>
 
@@ -560,11 +560,11 @@
 
   <div class="mobile-actions">
     <div class="lang-wrapper">
-      <button class="Lang-btn" onclick="toggleLangMenuMobile()" id="LangBtnMobile">🇺🇸</button>
+      <button class="Lang-btn" onclick="toggleLangMenuMobile()" id="LangBtnMobile">EN</button>
       <div class="lang-menu" id="langMenuMobile">
-        <button onclick="setLang('en')">🇺🇸 English</button>
-        <button onclick="setLang('fr')">🇫🇷 Français</button>
-        <button onclick="setLang('ar')">🇸🇦 العربية</button>
+        <button onclick="setLang('en')">EN English</button>
+        <button onclick="setLang('fr')">FR Français</button>
+        <button onclick="setLang('ar')">AR العربية</button>
       </div>
     </div>
 
@@ -741,21 +741,21 @@
     });
 
     if (lang === 'ar') {
-      document.documentElement.dir = 'rtl';
-      document.documentElement.lang = 'ar';
-      flagBtn.textContent = '🇸🇦';
-      flagBtnMobile.textContent = '🇸🇦';
-    } else if (lang === 'fr') {
-      document.documentElement.dir = 'ltr';
-      document.documentElement.lang = 'fr';
-      flagBtn.textContent = '🇫🇷';
-      flagBtnMobile.textContent = '🇫🇷';
-    } else {
-      document.documentElement.dir = 'ltr';
-      document.documentElement.lang = 'en';
-      flagBtn.textContent = '🇺🇸';
-      flagBtnMobile.textContent = '🇺🇸';
-    }
+  document.documentElement.dir = 'rtl';
+  document.documentElement.lang = 'ar';
+  flagBtn.textContent = 'AR';
+  flagBtnMobile.textContent = 'AR';
+} else if (lang === 'fr') {
+  document.documentElement.dir = 'ltr';
+  document.documentElement.lang = 'fr';
+  flagBtn.textContent = 'FR';
+  flagBtnMobile.textContent = 'FR';
+} else {
+  document.documentElement.dir = 'ltr';
+  document.documentElement.lang = 'en';
+  flagBtn.textContent = 'EN';
+  flagBtnMobile.textContent = 'EN';
+}
 
     langMenu.classList.remove('active');
     langMenuMobile.classList.remove('active');
@@ -770,3 +770,4 @@
 
 </body>
 </html>
+
