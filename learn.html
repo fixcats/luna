@@ -23,7 +23,7 @@
     }
 
     body.dark {
-      --bg: #1b1b1b;
+      --bg: #1c1c1c;
       --text: #ffffff;
       --muted: #bbbbbb;
       --card: #222222;
@@ -34,12 +34,12 @@
       font-family: Inter, system-ui, sans-serif;
       background: var(--bg);
       color: var(--text);
-      transition: background .3s, color .3s;
+      transition: background .25s ease, color .25s ease;
       min-height: 100vh;
     }
 
     a { text-decoration: none; color: inherit; }
-    button { font-family: inherit; }
+    button { font-family: inherit; background: none; border: none; }
 
     /* ================= HEADER ================= */
     header {
@@ -71,24 +71,10 @@
     .nav-left a {
       color: var(--text);
       opacity: .85;
-      transition: .25s;
-      position: relative;
+      transition: .2s;
     }
 
     .nav-left a:hover { opacity: 1; }
-
-    .nav-left a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -6px;
-      width: 0;
-      height: 1px;
-      background: var(--text);
-      transition: .25s;
-    }
-
-    .nav-left a:hover::after { width: 100%; }
 
     .logo {
       justify-self: center;
@@ -99,7 +85,7 @@
 
     .logo-main {
       font-family: "Didot", serif;
-      font-size: 28px;
+      font-size: 28px; /* ❗ НЕ МЕНЯЕМ */
       font-weight: 500;
       letter-spacing: .32em;
     }
@@ -112,12 +98,10 @@
     }
 
     .icon-btn {
-      background: none;
-      border: none;
       font-size: 20px;
       color: var(--text);
       cursor: pointer;
-      transition: .25s;
+      transition: .2s;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -125,12 +109,13 @@
 
     .icon-btn:hover { opacity: .7; }
 
+    /* LANGUAGE */
     .lang-wrapper { position: relative; }
 
-    .Lang-btn {
-      background: none;
-      border: none;
-      font-size: 20px;
+    .lang-btn {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .12em;
       cursor: pointer;
       color: var(--text);
     }
@@ -153,8 +138,6 @@
     .lang-menu.active { display: flex; }
 
     .lang-menu button {
-      background: none;
-      border: none;
       padding: 10px 12px;
       text-align: left;
       cursor: pointer;
@@ -163,7 +146,7 @@
       letter-spacing: .08em;
       color: var(--text);
       border-radius: 8px;
-      transition: .2s;
+      transition: .15s;
     }
 
     .lang-menu button:hover {
@@ -282,6 +265,10 @@
       border-radius: 24px;
       padding: 36px 30px;
       box-shadow: 0 30px 60px rgba(0,0,0,.15);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     .feature-card h3 {
@@ -327,6 +314,10 @@
       border-radius: 22px;
       padding: 26px 24px;
       box-shadow: 0 24px 50px rgba(0,0,0,.15);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     .mode-card h3 {
@@ -357,6 +348,10 @@
       padding: 30px 24px;
       text-align: center;
       box-shadow: 0 24px 50px rgba(0,0,0,.15);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .level-card h4 {
@@ -371,6 +366,7 @@
       color: var(--muted);
       letter-spacing: .08em;
       text-transform: uppercase;
+      line-height: 1.4;
     }
 
     /* ================= DISCLAIMER ================= */
@@ -400,7 +396,7 @@
       }
 
       .logo-main {
-        font-size: 22px;
+        font-size: 28px; /* ❗ НЕ МЕНЯЕМ */
       }
 
       .header-inner {
@@ -410,10 +406,14 @@
 
       .theme-btn { display: none; }
 
-      /* 🔥 MOBILE LAYOUT FIXES */
+      /* 🔥 MOBILE GRID FIXES */
       .feature-grid {
         grid-template-columns: 1fr;
-        gap: 14px;
+        gap: 16px;
+      }
+
+      .feature-card {
+        padding: 22px 20px;
       }
 
       .modes-grid {
@@ -422,18 +422,17 @@
       }
 
       .mode-card {
-        padding: 16px;
+        padding: 16px 14px;
       }
 
       .mode-card h3 {
-        font-size: 13.5px;
+        font-size: 13px;
       }
 
       .mode-card p {
-        font-size: 12px;
+        font-size: 11.5px;
       }
 
-      /* ✅ FIXED LEVELS — equal size, still in one row */
       .levels-grid {
         grid-template-columns: repeat(3, 1fr);
         gap: 10px;
@@ -441,34 +440,14 @@
 
       .level-card {
         padding: 14px 8px;
-        min-height: 92px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
       }
 
       .level-card h4 {
         font-size: 13px;
-        margin-bottom: 6px;
       }
 
       .level-card span {
         font-size: 10px;
-        line-height: 1.3;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .feature-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .modes-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .levels-grid {
-        grid-template-columns: repeat(3, 1fr);
       }
     }
 
@@ -492,7 +471,7 @@
     }
   </style>
 </head>
-<body class="dark">
+<body>
 
 <!-- ================= HEADER ================= -->
 <header>
@@ -503,7 +482,7 @@
     </button>
 
     <nav class="nav-left">
-      <a href="#" data-i18n="about">About Us</a>
+      <a href="index.html" data-i18n="about">About Us</a>
       <a href="learn.html" data-i18n="learn">Learn</a>
     </nav>
 
@@ -513,7 +492,7 @@
 
     <div class="header-actions">
       <div class="lang-wrapper">
-        <button class="Lang-btn" onclick="toggleLangMenu()" id="LangBtn">EN</button>
+        <button class="lang-btn" onclick="toggleLangMenu()" id="LangBtn">EN</button>
         <div class="lang-menu" id="langMenu">
           <button onclick="setLang('en')">EN English</button>
           <button onclick="setLang('fr')">FR Français</button>
@@ -542,12 +521,12 @@
     <button class="icon-btn"><i class="fa-solid fa-bag-shopping"></i></button>
   </div>
 
-  <a href="#" data-i18n="about">About Us</a>
+  <a href="index.html" data-i18n="about">About Us</a>
   <a href="learn.html" data-i18n="learn">Learn</a>
 
   <div class="mobile-actions">
     <div class="lang-wrapper">
-      <button class="Lang-btn" onclick="toggleLangMenuMobile()" id="LangBtnMobile">EN</button>
+      <button class="lang-btn" onclick="toggleLangMenuMobile()" id="LangBtnMobile">EN</button>
       <div class="lang-menu" id="langMenuMobile">
         <button onclick="setLang('en')">EN English</button>
         <button onclick="setLang('fr')">FR Français</button>
@@ -567,8 +546,8 @@
 
   <!-- INTRO -->
   <section class="section-head">
-    <h1>Learn More</h1>
-    <p>
+    <h1 data-i18n="learnTitle">Learn More</h1>
+    <p data-i18n="learnIntro">
       Thoughtfully designed for comfort, precision, and daily skincare rituals — LUNAVEK combines advanced LED technology with refined design to elevate your at-home routine.
     </p>
   </section>
@@ -576,22 +555,22 @@
   <!-- FEATURES -->
   <section class="feature-grid">
     <div class="feature-card">
-      <h3>Thoughtfully Designed for Skin Comfort</h3>
-      <p>
+      <h3 data-i18n="f1title">Thoughtfully Designed for Skin Comfort</h3>
+      <p data-i18n="f1text">
         The Luna Vek LED Beauty Mask is created using supple, food-grade silicone to ensure a smooth, comfortable fit suitable for consistent cosmetic use. Produced in accordance with globally recognized quality and safety frameworks including MDSAP, ISO 13485, FDA, CE, FCC, and RoHS.
       </p>
     </div>
 
     <div class="feature-card">
-      <h3>A Simple Daily Light Ritual</h3>
-      <p>
+      <h3 data-i18n="f2title">A Simple Daily Light Ritual</h3>
+      <p data-i18n="f2text">
         Just ten minutes per session offers a sophisticated at-home experience that complements your skincare routine and supports a naturally radiant-looking complexion.
       </p>
     </div>
 
     <div class="feature-card">
-      <h3>Precision 4-Color LED Technology</h3>
-      <p>
+      <h3 data-i18n="f3title">Precision 4-Color LED Technology</h3>
+      <p data-i18n="f3text">
         The mask incorporates 122 carefully positioned, high-performance LEDs to provide balanced, gentle light exposure across the face for refined cosmetic application.
       </p>
     </div>
@@ -599,41 +578,41 @@
 
   <!-- MODES -->
   <section class="modes-section">
-    <h2>Tailored Facial Care For You</h2>
-    <p>
+    <h2 data-i18n="modesTitle">Tailored Facial Care For You</h2>
+    <p data-i18n="modesIntro">
       6 skincare modes, three levels of adjustable brightness, and 10Hz pulsed light designed to support advanced cosmetic routines.
     </p>
 
     <div class="modes-grid">
 
       <div class="mode-card">
-        <h3>Restoration Mode (660nm)</h3>
-        <p>Promotes collagen synthesis, firms skin and increases elasticity.</p>
+        <h3 data-i18n="m1title">Restoration Mode (660nm)</h3>
+        <p data-i18n="m1text">Promotes collagen synthesis, firms skin and increases elasticity.</p>
       </div>
 
       <div class="mode-card">
-        <h3>Whitening Mode (590nm + 660nm)</h3>
-        <p>Brightens skin tone and helps break down pigmentation.</p>
+        <h3 data-i18n="m2title">Whitening Mode (590nm + 660nm)</h3>
+        <p data-i18n="m2text">Brightens skin tone and helps break down pigmentation.</p>
       </div>
 
       <div class="mode-card">
-        <h3>Anti-Aging Mode (660nm + 850nm)</h3>
-        <p>Stimulates circulation, improves blood flow, and supports skin vitality.</p>
+        <h3 data-i18n="m3title">Anti-Aging Mode (660nm + 850nm)</h3>
+        <p data-i18n="m3text">Stimulates circulation, improves blood flow, and supports skin vitality.</p>
       </div>
 
       <div class="mode-card">
-        <h3>Deep Repair Mode (590nm + 660nm + 850nm)</h3>
-        <p>Accelerates metabolism, improves skin tone and pigmentation.</p>
+        <h3 data-i18n="m4title">Deep Repair Mode (590nm + 660nm + 850nm)</h3>
+        <p data-i18n="m4text">Accelerates metabolism, improves skin tone and pigmentation.</p>
       </div>
 
       <div class="mode-card">
-        <h3>Acne Mode (415nm)</h3>
-        <p>Targets acne-causing bacteria and reduces inflammation and scarring.</p>
+        <h3 data-i18n="m5title">Acne Mode (415nm)</h3>
+        <p data-i18n="m5text">Targets acne-causing bacteria and reduces inflammation and scarring.</p>
       </div>
 
       <div class="mode-card">
-        <h3>Bedtime Care Mode (All LEDs)</h3>
-        <p>Supports collagen, reduces wrinkles, promotes relaxation and sleep quality.</p>
+        <h3 data-i18n="m6title">Bedtime Care Mode (All LEDs)</h3>
+        <p data-i18n="m6text">Supports collagen, reduces wrinkles, promotes relaxation and sleep quality.</p>
       </div>
 
     </div>
@@ -641,85 +620,272 @@
 
   <!-- LEVELS -->
   <section class="levels-section">
-    <h2>Three Levels of Dimming</h2>
-    <p>Adjusted to your heart’s content.</p>
+    <h2 data-i18n="levelsTitle">Three Levels of Dimming</h2>
+    <p data-i18n="levelsIntro">Adjusted to your heart’s content.</p>
 
     <div class="levels-grid">
       <div class="level-card">
-        <h4>50%</h4>
-        <span>Low Light Mode<br>Strengthening & Repairing</span>
+        <h4 data-i18n="l1num">50%</h4>
+        <span data-i18n="l1text">Low Light Mode<br>Strengthening & Repairing</span>
       </div>
 
       <div class="level-card">
-        <h4>80%</h4>
-        <span>Medium Light Mode<br>Brightening</span>
+        <h4 data-i18n="l2num">80%</h4>
+        <span data-i18n="l2text">Medium Light Mode<br>Brightening</span>
       </div>
 
       <div class="level-card">
-        <h4>100%</h4>
-        <span>High Mode<br>Anti-Wrinkle & Firming</span>
+        <h4 data-i18n="l3num">100%</h4>
+        <span data-i18n="l3text">High Mode<br>Anti-Wrinkle & Firming</span>
       </div>
     </div>
   </section>
 
   <!-- DISCLAIMER -->
-  <p class="disclaimer">
+  <p class="disclaimer" data-i18n="disclaimer">
     *For cosmetic use only. Individual results may vary. This product is not intended to diagnose, treat, cure, or prevent any disease.
   </p>
 
 </main>
 
 <script>
-  function applyTheme(theme) {
-    if (theme === "dark") {
-      document.body.classList.add("dark");
-    } else {
-      document.body.classList.remove("dark");
+/* ================= THEME (SYNC WITH INDEX) ================= */
+function applyTheme(theme) {
+  document.body.classList.toggle("dark", theme === "dark");
+}
+
+function toggleTheme() {
+  const newTheme = document.body.classList.contains("dark") ? "light" : "dark";
+  applyTheme(newTheme);
+  localStorage.setItem("theme", newTheme);
+}
+
+(function () {
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme) applyTheme(savedTheme);
+})();
+
+/* ================= MENU ================= */
+const menu = document.getElementById("mobileMenu");
+const overlay = document.getElementById("overlay");
+
+function toggleMenu() {
+  menu.classList.toggle("active");
+  overlay.classList.toggle("active");
+}
+
+/* ================= HOME ================= */
+function goHome() {
+  window.location.href = "index.html";
+}
+
+/* ================= LANGUAGE SYSTEM (REAL) ================= */
+const translations = {
+  en: {
+    about: "About Us",
+    learn: "Learn",
+    learnTitle: "Learn More",
+    learnIntro: "Thoughtfully designed for comfort, precision, and daily skincare rituals — LUNAVEK combines advanced LED technology with refined design to elevate your at-home routine.",
+
+    f1title: "Thoughtfully Designed for Skin Comfort",
+    f1text: "The Luna Vek LED Beauty Mask is created using supple, food-grade silicone to ensure a smooth, comfortable fit suitable for consistent cosmetic use. Produced in accordance with globally recognized quality and safety frameworks including MDSAP, ISO 13485, FDA, CE, FCC, and RoHS.",
+
+    f2title: "A Simple Daily Light Ritual",
+    f2text: "Just ten minutes per session offers a sophisticated at-home experience that complements your skincare routine and supports a naturally radiant-looking complexion.",
+
+    f3title: "Precision 4-Color LED Technology",
+    f3text: "The mask incorporates 122 carefully positioned, high-performance LEDs to provide balanced, gentle light exposure across the face for refined cosmetic application.",
+
+    modesTitle: "Tailored Facial Care For You",
+    modesIntro: "6 skincare modes, three levels of adjustable brightness, and 10Hz pulsed light designed to support advanced cosmetic routines.",
+
+    m1title: "Restoration Mode (660nm)",
+    m1text: "Promotes collagen synthesis, firms skin and increases elasticity.",
+
+    m2title: "Whitening Mode (590nm + 660nm)",
+    m2text: "Brightens skin tone and helps break down pigmentation.",
+
+    m3title: "Anti-Aging Mode (660nm + 850nm)",
+    m3text: "Stimulates circulation, improves blood flow, and supports skin vitality.",
+
+    m4title: "Deep Repair Mode (590nm + 660nm + 850nm)",
+    m4text: "Accelerates metabolism, improves skin tone and pigmentation.",
+
+    m5title: "Acne Mode (415nm)",
+    m5text: "Targets acne-causing bacteria and reduces inflammation and scarring.",
+
+    m6title: "Bedtime Care Mode (All LEDs)",
+    m6text: "Supports collagen, reduces wrinkles, promotes relaxation and sleep quality.",
+
+    levelsTitle: "Three Levels of Dimming",
+    levelsIntro: "Adjusted to your heart’s content.",
+
+    l1num: "50%",
+    l1text: "Low Light Mode<br>Strengthening & Repairing",
+
+    l2num: "80%",
+    l2text: "Medium Light Mode<br>Brightening",
+
+    l3num: "100%",
+    l3text: "High Mode<br>Anti-Wrinkle & Firming",
+
+    disclaimer: "*For cosmetic use only. Individual results may vary. This product is not intended to diagnose, treat, cure, or prevent any disease."
+  },
+
+  fr: {
+    about: "À propos",
+    learn: "Découvrir",
+    learnTitle: "En savoir plus",
+    learnIntro: "Conçu avec soin pour le confort, la précision et les rituels quotidiens — LUNAVEK associe une technologie LED avancée à un design raffiné pour sublimer votre routine beauté.",
+
+    f1title: "Conçu pour le confort de la peau",
+    f1text: "Le masque LED Luna Vek est fabriqué en silicone souple de qualité alimentaire pour garantir un ajustement confortable adapté à un usage cosmétique régulier. Conforme aux normes internationales MDSAP, ISO 13485, FDA, CE, FCC et RoHS.",
+
+    f2title: "Un rituel lumineux quotidien",
+    f2text: "Dix minutes par séance offrent une expérience élégante à domicile qui complète votre routine de soins et favorise une peau visiblement éclatante.",
+
+    f3title: "Technologie LED 4 couleurs de précision",
+    f3text: "Le masque intègre 122 LED haute performance positionnées avec précision pour une diffusion lumineuse douce et équilibrée sur l’ensemble du visage.",
+
+    modesTitle: "Soin du visage personnalisé",
+    modesIntro: "6 modes de soin, trois niveaux de luminosité réglables et une lumière pulsée à 10 Hz pour soutenir votre routine cosmétique.",
+
+    m1title: "Mode Régénération (660nm)",
+    m1text: "Favorise la synthèse du collagène, raffermit la peau et améliore son élasticité.",
+
+    m2title: "Mode Éclat (590nm + 660nm)",
+    m2text: "Illumine le teint et aide à réduire les pigments.",
+
+    m3title: "Mode Anti-Âge (660nm + 850nm)",
+    m3text: "Stimule la circulation sanguine et améliore la vitalité de la peau.",
+
+    m4title: "Mode Réparation Profonde (590nm + 660nm + 850nm)",
+    m4text: "Accélère le métabolisme et améliore la texture et la pigmentation de la peau.",
+
+    m5title: "Mode Acné (415nm)",
+    m5text: "Cible les bactéries responsables de l’acné et réduit l’inflammation et les marques.",
+
+    m6title: "Mode Nuit (Toutes LEDs)",
+    m6text: "Favorise le collagène, réduit les rides, aide à la relaxation et améliore le sommeil.",
+
+    levelsTitle: "Trois niveaux d’intensité",
+    levelsIntro: "Réglés selon vos envies.",
+
+    l1num: "50%",
+    l1text: "Mode Faible Lumière<br>Renforcement & Réparation",
+
+    l2num: "80%",
+    l2text: "Mode Lumière Moyenne<br>Éclat",
+
+    l3num: "100%",
+    l3text: "Mode Haute Intensité<br>Anti-Rides & Fermeté",
+
+    disclaimer: "*Usage cosmétique uniquement. Les résultats peuvent varier. Ce produit n’est pas destiné à diagnostiquer, traiter, guérir ou prévenir une maladie."
+  },
+
+  ar: {
+    about: "من نحن",
+    learn: "تعرف أكثر",
+    learnTitle: "اعرف المزيد",
+    learnIntro: "تم تصميم LUNAVEK بعناية ليوفر الراحة والدقة في روتين العناية اليومية بالبشرة باستخدام أحدث تقنيات الإضاءة LED.",
+
+    f1title: "مصمم لراحة البشرة",
+    f1text: "تم تصنيع قناع Luna Vek من سيليكون مرن وآمن غذائياً ليضمن راحة مثالية للاستخدام التجميلي المتكرر. متوافق مع معايير الجودة العالمية مثل MDSAP وISO 13485 وFDA وCE وFCC وRoHS.",
+
+    f2title: "طقس ضوئي يومي بسيط",
+    f2text: "عشر دقائق فقط في الجلسة تمنحك تجربة راقية في المنزل وتدعم إشراقة البشرة الطبيعية.",
+
+    f3title: "تقنية LED رباعية الألوان عالية الدقة",
+    f3text: "يحتوي القناع على 122 مصباح LED عالي الأداء موزعة بدقة لتوفير إضاءة متوازنة ولطيفة على الوجه بالكامل.",
+
+    modesTitle: "عناية مخصصة للوجه",
+    modesIntro: "6 أوضاع للعناية بالبشرة وثلاثة مستويات سطوع وإضاءة نبضية بتردد 10 هرتز لدعم روتينك التجميلي.",
+
+    m1title: "وضع الاستعادة (660nm)",
+    m1text: "يعزز إنتاج الكولاجين ويشد البشرة ويزيد من مرونتها.",
+
+    m2title: "وضع التفتيح (590nm + 660nm)",
+    m2text: "يفتح لون البشرة ويساعد في تفكيك التصبغات.",
+
+    m3title: "وضع مقاومة الشيخوخة (660nm + 850nm)",
+    m3text: "ينشط الدورة الدموية ويحسن تدفق الدم ويعزز صحة البشرة.",
+
+    m4title: "وضع الإصلاح العميق (590nm + 660nm + 850nm)",
+    m4text: "يسرع الأيض ويحسن نسيج البشرة والتصبغات.",
+
+    m5title: "وضع حب الشباب (415nm)",
+    m5text: "يقضي على البكتيريا المسببة لحب الشباب ويقلل الالتهاب والآثار.",
+
+    m6title: "وضع العناية الليلية (جميع الأضواء)",
+    m6text: "يعزز الكولاجين ويقلل التجاعيد ويساعد على الاسترخاء وتحسين النوم.",
+
+    levelsTitle: "ثلاثة مستويات للسطوع",
+    levelsIntro: "مضبوطة حسب رغبتك.",
+
+    l1num: "50%",
+    l1text: "وضع الإضاءة المنخفضة<br>تقوية وإصلاح",
+
+    l2num: "80%",
+    l2text: "وضع الإضاءة المتوسطة<br>تفتيح",
+
+    l3num: "100%",
+    l3text: "وضع الإضاءة العالية<br>مقاومة التجاعيد وشد البشرة",
+
+    disclaimer: "*للاستخدام التجميلي فقط. قد تختلف النتائج. هذا المنتج غير مخصص لتشخيص أو علاج أو شفاء أو منع أي مرض."
+  }
+};
+
+const langBtn = document.getElementById("LangBtn");
+const langBtnMobile = document.getElementById("LangBtnMobile");
+const langMenu = document.getElementById("langMenu");
+const langMenuMobile = document.getElementById("langMenuMobile");
+
+function toggleLangMenu() {
+  langMenu.classList.toggle("active");
+}
+
+function toggleLangMenuMobile() {
+  langMenuMobile.classList.toggle("active");
+}
+
+function setLang(lang) {
+  localStorage.setItem("lang", lang);
+
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+
+  langBtn.textContent = lang.toUpperCase();
+  langBtnMobile.textContent = lang.toUpperCase();
+
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.getAttribute("data-i18n");
+    if (translations[lang][key]) {
+      el.innerHTML = translations[lang][key];
     }
+  });
+
+  langMenu.classList.remove("active");
+  langMenuMobile.classList.remove("active");
+}
+
+/* Restore saved language */
+(function () {
+  const savedLang = localStorage.getItem("lang") || "en";
+  setLang(savedLang);
+})();
+
+/* Close language menus when clicking outside */
+document.addEventListener("click", e => {
+  if (!e.target.closest(".lang-wrapper")) {
+    langMenu.classList.remove("active");
+    langMenuMobile.classList.remove("active");
   }
-
-  function toggleTheme() {
-    const isDark = document.body.classList.toggle("dark");
-    localStorage.setItem("theme", isDark ? "dark" : "light");
-  }
-
-  // apply saved theme on load
-  (function () {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme) applyTheme(savedTheme);
-  })();
-
-  const menu = document.getElementById('mobileMenu');
-  const overlay = document.getElementById('overlay');
-
-  function toggleMenu() {
-    menu.classList.toggle('active');
-    overlay.classList.toggle('active');
-  }
-
-  const langMenu = document.getElementById('langMenu');
-  const langMenuMobile = document.getElementById('langMenuMobile');
-
-  function toggleLangMenu() {
-    langMenu.classList.toggle('active');
-  }
-
-  function toggleLangMenuMobile() {
-    langMenuMobile.classList.toggle('active');
-  }
-
-  function setLang(lang) {
-    langMenu.classList.remove('active');
-    langMenuMobile.classList.remove('active');
-  }
-
-  function goHome() {
-    window.location.href = "index.html";
-  }
+});
 </script>
 
 </body>
 </html>
+
 
 
 
