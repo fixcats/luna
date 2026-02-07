@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LUNAVEK — Learn More</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Didot&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ffffff;
+      --text: #111111;
+      --muted: #666666;
+      --card: #ffffff;
+      --border: rgba(0,0,0,0.08);
+    }
+
+    body.dark {
+      --bg: #1b1b1b;
+      --text: #ffffff;
+      --muted: #bbbbbb;
+      --card: #222222;
+      --border: rgba(255,255,255,0.12);
+    }
+
+    body {
+      font-family: Inter, system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: background .3s, color .3s;
+      min-height: 100vh;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    button { font-family: inherit; }
+
+    /* ================= HEADER ================= */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      max-width: 1800px;
+      margin: auto;
+      padding: 16px 22px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+    }
+
+    .nav-left {
+      display: flex;
+      gap: 34px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .nav-left a {
+      color: var(--text);
+      opacity: .85;
+      transition: .25s;
+      position: relative;
+    }
+
+    .nav-left a:hover { opacity: 1; }
+
+    .nav-left a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 0;
+      height: 1px;
+      background: var(--text);
+      transition: .25s;
+    }
+
+    .nav-left a:hover::after { width: 100%; }
+
+    .logo {
+      justify-self: center;
+      text-align: center;
+      cursor: pointer;
+      line-height: 1.1;
+    }
+
+    .logo-main {
+      font-family: "Didot", serif;
+      font-size: 28px;
+      font-weight: 500;
+      letter-spacing: .32em;
+    }
+
+    .header-actions {
+      justify-self: end;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .icon-btn {
+      background: none;
+      border: none;
+      font-size: 20px;
+      color: var(--text);
+      cursor: pointer;
+      transition: .25s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .icon-btn:hover { opacity: .7; }
+
+    .lang-wrapper { position: relative; }
+
+    .Lang-btn {
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      color: var(--text);
+    }
+
+    .lang-menu {
+      position: absolute;
+      right: 0;
+      top: 130%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: 0 12px 32px rgba(0,0,0,.2);
+      padding: 6px;
+      display: none;
+      flex-direction: column;
+      min-width: 150px;
+      z-index: 300;
+    }
+
+    .lang-menu.active { display: flex; }
+
+    .lang-menu button {
+      background: none;
+      border: none;
+      padding: 10px 12px;
+      text-align: left;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      color: var(--text);
+      border-radius: 8px;
+      transition: .2s;
+    }
+
+    .lang-menu button:hover {
+      background: rgba(0,0,0,.06);
+    }
+
+    body.dark .lang-menu button:hover {
+      background: rgba(255,255,255,.08);
+    }
+
+    .menu-btn { display: none; }
+
+    /* ================= MOBILE DRAWER ================= */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      left: -100%;
+      width: 300px;
+      height: 100vh;
+      background: var(--bg);
+      border-right: 1px solid var(--border);
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 26px;
+      transition: .35s ease;
+      z-index: 250;
+    }
+
+    .mobile-menu.active { left: 0; }
+
+    .mobile-top {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .mobile-logo {
+      text-align: center;
+      font-family: "Didot", serif;
+      font-size: 22px;
+      letter-spacing: .28em;
+      cursor: pointer;
+    }
+
+    .mobile-menu a {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    .mobile-actions {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.45);
+      opacity: 0;
+      pointer-events: none;
+      transition: .3s;
+      z-index: 220;
+    }
+
+    .overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    /* ================= PAGE ================= */
+    .page {
+      max-width: 1200px;
+      margin: auto;
+      padding: 100px 22px 120px;
+      display: flex;
+      flex-direction: column;
+      gap: 120px;
+    }
+
+    .section-head {
+      text-align: center;
+      max-width: 720px;
+      margin: auto;
+    }
+
+    .section-head h1 {
+      font-size: clamp(26px, 4vw, 40px);
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .section-head p {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ================= FEATURE GRID ================= */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+
+    .feature-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 36px 30px;
+      box-shadow: 0 30px 60px rgba(0,0,0,.15);
+    }
+
+    .feature-card h3 {
+      font-size: 18px;
+      margin-bottom: 14px;
+      font-weight: 700;
+    }
+
+    .feature-card p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    /* ================= MODES ================= */
+    .modes-section h2,
+    .levels-section h2 {
+      text-align: center;
+      font-size: clamp(22px, 3vw, 32px);
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .modes-section p,
+    .levels-section p {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 60px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .modes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .mode-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 26px 24px;
+      box-shadow: 0 24px 50px rgba(0,0,0,.15);
+    }
+
+    .mode-card h3 {
+      font-size: 16px;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .mode-card p {
+      font-size: 13.5px;
+      line-height: 1.65;
+      color: var(--muted);
+    }
+
+    /* ================= LEVELS ================= */
+    .levels-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 26px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .level-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 30px 24px;
+      text-align: center;
+      box-shadow: 0 24px 50px rgba(0,0,0,.15);
+    }
+
+    .level-card h4 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      font-weight: 700;
+      letter-spacing: .04em;
+    }
+
+    .level-card span {
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    /* ================= DISCLAIMER ================= */
+    .disclaimer {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 800px;
+      margin: auto;
+      text-align: center;
+    }
+
+    /* ================= RESPONSIVE ================= */
+    @media (max-width: 1024px) {
+      .feature-grid { grid-template-columns: 1fr 1fr; }
+      .modes-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 820px) {
+      .nav-left { display: none; }
+      .menu-btn { display: inline-flex; }
+
+      .logo {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .logo-main {
+        font-size: 22px;
+      }
+
+      .header-inner {
+        grid-template-columns: auto 1fr auto;
+        padding: 22px 22px;
+      }
+
+      .theme-btn { display: none; }
+
+      /* 🔥 MOBILE LAYOUT FIXES (THIS IS WHAT YOU ASKED) */
+      .feature-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+
+      .modes-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+
+      .mode-card {
+        padding: 16px;
+      }
+
+      .mode-card h3 {
+        font-size: 13.5px;
+      }
+
+      .mode-card p {
+        font-size: 12px;
+      }
+
+      .levels-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+      }
+
+      .level-card {
+        padding: 16px 10px;
+      }
+
+      .level-card h4 {
+        font-size: 14px;
+      }
+
+      .level-card span {
+        font-size: 11px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .feature-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .modes-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .levels-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    /* ================= RTL ================= */
+    html[dir="rtl"] { direction: rtl; }
+
+    html[dir="rtl"] .lang-menu {
+      right: auto;
+      left: 0;
+    }
+
+    html[dir="rtl"] .mobile-menu {
+      left: auto;
+      right: -100%;
+      border-right: none;
+      border-left: 1px solid var(--border);
+    }
+
+    html[dir="rtl"] .mobile-menu.active {
+      right: 0;
+    }
+  </style>
+</head>
+<body class="dark">
+
+<!-- ================= HEADER ================= -->
+<header>
+  <div class="header-inner">
+
+    <button class="icon-btn menu-btn" onclick="toggleMenu()" aria-label="Menu">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <nav class="nav-left">
+      <a href="#" data-i18n="about">About Us</a>
+      <a href="learn.html" data-i18n="learn">Learn</a>
+    </nav>
+
+    <div class="logo" onclick="goHome()">
+      <span class="logo-main">LUNAVEK</span>
+    </div>
+
+    <div class="header-actions">
+      <div class="lang-wrapper">
+        <button class="Lang-btn" onclick="toggleLangMenu()" id="LangBtn">EN</button>
+        <div class="lang-menu" id="langMenu">
+          <button onclick="setLang('en')">EN English</button>
+          <button onclick="setLang('fr')">FR Français</button>
+          <button onclick="setLang('ar')">AR العربية</button>
+        </div>
+      </div>
+
+      <button class="icon-btn" aria-label="Cart">
+        <i class="fa-solid fa-bag-shopping"></i>
+      </button>
+
+      <button class="icon-btn theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">
+        <i class="fa-solid fa-moon"></i>
+      </button>
+    </div>
+
+  </div>
+</header>
+
+<!-- ================= MOBILE MENU ================= -->
+<div class="mobile-menu" id="mobileMenu">
+
+  <div class="mobile-top">
+    <button class="icon-btn" onclick="toggleMenu()"><i class="fa-solid fa-xmark"></i></button>
+    <div class="mobile-logo" onclick="goHome()">LUNAVEK</div>
+    <button class="icon-btn"><i class="fa-solid fa-bag-shopping"></i></button>
+  </div>
+
+  <a href="#" data-i18n="about">About Us</a>
+  <a href="learn.html" data-i18n="learn">Learn</a>
+
+  <div class="mobile-actions">
+    <div class="lang-wrapper">
+      <button class="Lang-btn" onclick="toggleLangMenuMobile()" id="LangBtnMobile">EN</button>
+      <div class="lang-menu" id="langMenuMobile">
+        <button onclick="setLang('en')">EN English</button>
+        <button onclick="setLang('fr')">FR Français</button>
+        <button onclick="setLang('ar')">AR العربية</button>
+      </div>
+    </div>
+
+    <button class="icon-btn" onclick="toggleTheme()"><i class="fa-solid fa-moon"></i></button>
+  </div>
+
+</div>
+
+<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+<!-- ================= PAGE CONTENT ================= -->
+<main class="page">
+
+  <!-- INTRO -->
+  <section class="section-head">
+    <h1>Learn More</h1>
+    <p>
+      Thoughtfully designed for comfort, precision, and daily skincare rituals — LUNAVEK combines advanced LED technology with refined design to elevate your at-home routine.
+    </p>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="feature-grid">
+    <div class="feature-card">
+      <h3>Thoughtfully Designed for Skin Comfort</h3>
+      <p>
+        The Luna Vek LED Beauty Mask is created using supple, food-grade silicone to ensure a smooth, comfortable fit suitable for consistent cosmetic use. Produced in accordance with globally recognized quality and safety frameworks including MDSAP, ISO 13485, FDA, CE, FCC, and RoHS.
+      </p>
+    </div>
+
+    <div class="feature-card">
+      <h3>A Simple Daily Light Ritual</h3>
+      <p>
+        Just ten minutes per session offers a sophisticated at-home experience that complements your skincare routine and supports a naturally radiant-looking complexion.
+      </p>
+    </div>
+
+    <div class="feature-card">
+      <h3>Precision 4-Color LED Technology</h3>
+      <p>
+        The mask incorporates 122 carefully positioned, high-performance LEDs to provide balanced, gentle light exposure across the face for refined cosmetic application.
+      </p>
+    </div>
+  </section>
+
+  <!-- MODES -->
+  <section class="modes-section">
+    <h2>Tailored Facial Care For You</h2>
+    <p>
+      6 skincare modes, three levels of adjustable brightness, and 10Hz pulsed light designed to support advanced cosmetic routines.
+    </p>
+
+    <div class="modes-grid">
+
+      <div class="mode-card">
+        <h3>Restoration Mode (660nm)</h3>
+        <p>Promotes collagen synthesis, firms skin and increases elasticity.</p>
+      </div>
+
+      <div class="mode-card">
+        <h3>Whitening Mode (590nm + 660nm)</h3>
+        <p>Brightens skin tone and helps break down pigmentation.</p>
+      </div>
+
+      <div class="mode-card">
+        <h3>Anti-Aging Mode (660nm + 850nm)</h3>
+        <p>Stimulates circulation, improves blood flow, and supports skin vitality.</p>
+      </div>
+
+      <div class="mode-card">
+        <h3>Deep Repair Mode (590nm + 660nm + 850nm)</h3>
+        <p>Accelerates metabolism, improves skin tone and pigmentation.</p>
+      </div>
+
+      <div class="mode-card">
+        <h3>Acne Mode (415nm)</h3>
+        <p>Targets acne-causing bacteria and reduces inflammation and scarring.</p>
+      </div>
+
+      <div class="mode-card">
+        <h3>Bedtime Care Mode (All LEDs)</h3>
+        <p>Supports collagen, reduces wrinkles, promotes relaxation and sleep quality.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- LEVELS -->
+  <section class="levels-section">
+    <h2>Three Levels of Dimming</h2>
+    <p>Adjusted to your heart’s content.</p>
+
+    <div class="levels-grid">
+      <div class="level-card">
+        <h4>50%</h4>
+        <span>Low Light Mode<br>Strengthening & Repairing</span>
+      </div>
+
+      <div class="level-card">
+        <h4>80%</h4>
+        <span>Medium Light Mode<br>Brightening</span>
+      </div>
+
+      <div class="level-card">
+        <h4>100%</h4>
+        <span>High Mode<br>Anti-Wrinkle & Firming</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- DISCLAIMER -->
+  <p class="disclaimer">
+    *For cosmetic use only. Individual results may vary. This product is not intended to diagnose, treat, cure, or prevent any disease.
+  </p>
+
+</main>
+
+<script>
+  function toggleTheme() {
+    document.body.classList.toggle('dark');
+  }
+
+  const menu = document.getElementById('mobileMenu');
+  const overlay = document.getElementById('overlay');
+
+  function toggleMenu() {
+    menu.classList.toggle('active');
+    overlay.classList.toggle('active');
+  }
+
+  const langMenu = document.getElementById('langMenu');
+  const langMenuMobile = document.getElementById('langMenuMobile');
+
+  function toggleLangMenu() {
+    langMenu.classList.toggle('active');
+  }
+
+  function toggleLangMenuMobile() {
+    langMenuMobile.classList.toggle('active');
+  }
+
+  function setLang(lang) {
+    langMenu.classList.remove('active');
+    langMenuMobile.classList.remove('active');
+  }
+
+  function goHome() {
+    window.location.href = "index.html";
+  }
+</script>
+
+</body>
+</html>
