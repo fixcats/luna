@@ -71,10 +71,24 @@
     .nav-left a {
       color: var(--text);
       opacity: .85;
-      transition: .2s;
+      transition: .25s;
+      position: relative;
     }
 
     .nav-left a:hover { opacity: 1; }
+
+    .nav-left a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 0;
+      height: 1px;
+      background: var(--text);
+      transition: .25s;
+    }
+
+    .nav-left a:hover::after { width: 100%; }
 
     .logo {
       justify-self: center;
@@ -501,7 +515,7 @@
       </div>
 
       <button class="icon-btn" aria-label="Cart">
-        <i class="fa-solid fa-bag-shopping"></i>
+        <a href="cart.html" class="icon-btn"><i class="fa-solid fa-bag-shopping"></i></a>
       </button>
 
       <button class="icon-btn theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">
