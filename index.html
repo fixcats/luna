@@ -108,6 +108,44 @@
       letter-spacing: .32em;
     }
 
+    /* HEADER ACTIONS */
+.header-actions{
+  justify-self:end;
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+
+.icon-btn{
+  background:none;
+  border:none;
+  font-size:20px;
+  color:var(--text);
+  transition:.25s;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+}
+
+.icon-btn:hover{
+  opacity:.7;
+}
+
+/* CART BADGE */
+.cart-badge{
+  position:absolute;
+  top:-6px;
+  right:-8px;
+  background:var(--text);
+  color:var(--bg);
+  font-size:10px;
+  font-weight:700;
+  padding:2px 6px;
+  border-radius:999px;
+  display:none;
+}
+
     /* RIGHT ACTIONS */
     .header-actions {
       justify-self: end;
@@ -508,6 +546,7 @@
     <nav class="nav-left">
       <a href="#" data-i18n="about">About Us</a>
       <a href="learn.html" data-i18n="learn">Learn</a>
+      <a href="product.html">Product</a>
     </nav>
 
     <!-- LOGO CENTER -->
@@ -530,7 +569,8 @@
 
       <!-- CART -->
       <button class="icon-btn" aria-label="Cart">
-        <a href="cart.html" class="icon-btn"><i class="fa-solid fa-bag-shopping"></i></a>
+        <a href="cart.html" class="icon-btn"><i class="fa-solid fa-bag-shopping"></i>
+        <span class="cart-badge" id="cartBadge">0</span></a>
       </button>
 
       <!-- THEME (DESKTOP ONLY) -->
@@ -549,11 +589,14 @@
   <div class="mobile-top">
     <button class="icon-btn" onclick="toggleMenu()"><i class="fa-solid fa-xmark"></i></button>
     <div class="mobile-logo" onclick="goHome()">LUNAVEK</div>
-    <button class="icon-btn"><i class="fa-solid fa-bag-shopping"></i></button>
+    <button class="icon-btn"><i class="fa-solid fa-bag-shopping"></i>
+    <span class="cart-badge" id="cartBadge">0</span>
+    </button>
   </div>
 
   <a href="#" data-i18n="about">About Us</a>
   <a href="learn.html" data-i18n="learn">Learn</a>
+  <a href="product.html">Product</a>
 
   <div class="mobile-actions">
     <div class="lang-wrapper">
@@ -665,6 +708,8 @@
     menu.classList.toggle('active');
     overlay.classList.toggle('active');
   }
+
+  
 
   /* ================= LANGUAGE ================= */
   const langMenu = document.getElementById('langMenu');
@@ -780,8 +825,35 @@
   }
 </script>
 
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+
+  function updateCartBadges(){
+
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const total = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
+
+    const badges = document.querySelectorAll(".cart-badge");
+
+    badges.forEach(function(badge){
+      if(total > 0){
+        badge.textContent = total;
+        badge.style.display = "flex";
+      } else {
+        badge.style.display = "none";
+      }
+    });
+  }
+
+  updateCartBadges();
+
+});
+</script>
+
+
 </body>
 </html>
+
 
 
 
