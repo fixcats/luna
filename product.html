@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LUNAVEK — Professional LED Facial Mask</title>
+
+<!-- FONTS -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Didot&display=swap" rel="stylesheet">
+
+<!-- ICONS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+/* =========================================================
+   RESET
+========================================================= */
+*,
+*::before,
+*::after{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html,body{
+  width:100%;
+  min-height:100%;
+}
+
+body{
+  font-family:Inter,system-ui,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  transition:background .3s,color .3s;
+}
+
+/* =========================================================
+   THEME (MATCH INDEX)
+========================================================= */
+:root{
+  --bg:#ffffff;
+  --text:#111111;
+  --muted:#777777;
+  --card:#ffffff;
+  --border:rgba(0,0,0,0.08);
+  --panel:#f6f6f6;
+}
+
+body.dark{
+  --bg:#1b1b1b;
+  --text:#ffffff;
+  --muted:#bbbbbb;
+  --card:#222222;
+  --border:rgba(255,255,255,0.12);
+  --panel:#242424;
+}
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+button{
+  font-family:inherit;
+  cursor:pointer;
+}
+
+/* =========================================================
+   HEADER (IDENTICAL STRUCTURE TO INDEX)
+========================================================= */
+header{
+  position:sticky;
+  top:0;
+  z-index:500;
+  background:var(--bg);
+  border-bottom:1px solid var(--border);
+}
+
+.header-inner{
+  max-width:1800px;
+  margin:auto;
+  padding:16px 22px;
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+}
+
+/* NAV LEFT */
+.nav-left{
+  display:flex;
+  gap:34px;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+
+.nav-left a{
+  opacity:.85;
+  position:relative;
+  transition:.25s;
+}
+
+.nav-left a:hover{
+  opacity:1;
+}
+
+.nav-left a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-6px;
+  width:0;
+  height:1px;
+  background:var(--text);
+  transition:.25s;
+}
+
+.nav-left a:hover::after{
+  width:100%;
+}
+
+/* LOGO */
+.logo{
+  justify-self:center;
+  text-align:center;
+  cursor:pointer;
+  line-height:1.1;
+}
+
+.logo-main{
+  font-family:"Didot","Playfair Display",serif;
+  font-size:28px;
+  font-weight:500;
+  letter-spacing:.32em;
+}
+
+/* HEADER ACTIONS */
+.header-actions{
+  justify-self:end;
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+
+.icon-btn{
+  background:none;
+  border:none;
+  font-size:20px;
+  color:var(--text);
+  transition:.25s;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+}
+
+.icon-btn:hover{
+  opacity:.7;
+}
+
+/* CART BADGE */
+.cart-badge{
+  position:absolute;
+  top:-6px;
+  right:-8px;
+  background:var(--text);
+  color:var(--bg);
+  font-size:10px;
+  font-weight:700;
+  padding:2px 6px;
+  border-radius:999px;
+  display:none;
+}
+
+/* LANGUAGE */
+.lang-wrapper{
+  position:relative;
+}
+
+.Lang-btn{
+  background:none;
+  border:none;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--text);
+}
+
+.lang-menu{
+  position:absolute;
+  right:0;
+  top:130%;
+  background:var(--bg);
+  border:1px solid var(--border);
+  border-radius:12px;
+  box-shadow:0 12px 32px rgba(0,0,0,.2);
+  padding:6px;
+  display:none;
+  flex-direction:column;
+  min-width:150px;
+  z-index:300;
+}
+
+.lang-menu.active{
+  display:flex;
+}
+
+.lang-menu button{
+  background:none;
+  border:none;
+  padding:10px 12px;
+  text-align:left;
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:.08em;
+  border-radius:8px;
+  color:var(--text);
+  transition: .2s;
+}
+
+.lang-menu button:hover{
+  background:rgba(0,0,0,.06);
+}
+
+body.dark .lang-menu button:hover{
+  background:rgba(255,255,255,.08);
+}
+
+/* MOBILE MENU */
+.menu-btn{
+  display:none;
+}
+
+.mobile-menu{
+  position:fixed;
+  top:0;
+  left:-100%;
+  width:300px;
+  height:100vh;
+  background:var(--bg);
+  border-right:1px solid var(--border);
+  padding:28px 24px;
+  display:flex;
+  flex-direction:column;
+  gap:26px;
+  transition:.35s ease;
+  z-index:550;
+}
+
+.mobile-menu.active{
+  left:0;
+}
+
+.mobile-top{
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  margin-bottom:24px;
+}
+
+.mobile-logo{
+  text-align:center;
+  font-family:"Didot",serif;
+  font-size:22px;
+  letter-spacing:.28em;
+}
+
+.mobile-menu a{
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+}
+
+.mobile-actions{
+  margin-top:auto;
+  display:flex;
+  gap:16px;
+  align-items:center;
+}
+
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  opacity:0;
+  pointer-events:none;
+  transition:.3s;
+  z-index:520;
+}
+
+.overlay.active{
+  opacity:1;
+  pointer-events:all;
+}
+
+/* =========================================================
+   PRODUCT LAYOUT
+========================================================= */
+.product-section{
+  max-width:1300px;
+  margin:auto;
+  padding:90px 22px 40px;
+}
+
+.product-grid{
+  display:grid;
+  grid-template-columns:1.1fr 1fr;
+  gap:90px;
+  align-items:center;
+}
+
+.product-image{
+  border-radius:32px;
+  overflow:hidden;
+  background:#000;
+  box-shadow:0 45px 90px rgba(0,0,0,.25);
+}
+
+.product-image img{
+  width:100%;
+  height:470px;
+  object-fit:cover;
+  display:block;
+}
+
+.product-info h1{
+  font-size:clamp(30px,4vw,46px);
+  font-weight:700;
+  margin-bottom:20px;
+  line-height:1.15;
+}
+
+.product-info .subtitle{
+  font-size:17px;
+  color:var(--muted);
+  line-height:1.8;
+  margin-bottom:40px;
+  max-width:520px;
+}
+
+.buy-row{
+  display:flex;
+  align-items:center;
+  gap:30px;
+  flex-wrap:wrap;
+}
+
+.price{
+  font-size:32px;
+  font-weight:700;
+}
+
+.buy-btn{
+  background:var(--text);
+  color:var(--bg);
+  border:none;
+  padding:16px 44px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  transition:.25s;
+}
+
+.buy-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 32px rgba(0,0,0,.25);
+}
+
+
+.buy-secondary{
+  background:transparent;
+  border:1px solid var(--text);
+  color:var(--text);
+  padding:16px 44px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  transition:.25s;
+}
+
+.buy-secondary:hover{
+  background:var(--text);
+  color:var(--bg);
+}
+
+.product-details {
+  margin-top: 110px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 110px;
+}
+
+/* SECTION TITLE */
+.section-title {
+  text-align: center;
+  font-size: 20px;
+  letter-spacing: .12em;
+  font-weight: 700;
+  margin-bottom: 56px;
+}
+
+/* ================= SPECIFICATIONS ================= */
+.spec-grid {
+  max-width: 1100px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 44px 36px;
+}
+
+.spec-item {
+  text-align: center;
+  padding: 26px 18px;
+  border-radius: 18px;
+  transition: .25s ease;
+}
+
+.spec-item:hover {
+  background: var(--panel);
+}
+
+.spec-label {
+  font-size: 11px;
+  letter-spacing: .2em;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.spec-value {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* ================= INCLUDED ================= */
+.includes-wrap {
+  background: var(--panel);
+  padding: 90px 22px;
+  border-radius: 56px;
+}
+
+.includes-grid {
+  max-width: 1100px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.include-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 26px 20px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: .25s ease;
+}
+
+.include-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px rgba(0,0,0,.15);
+}
+
+/* =========================================================
+   ACCORDION (UPGRADED DESIGN)
+========================================================= */
+
+.accordion{
+  max-width:1000px;
+  margin:120px auto 0;
+  display:flex;
+  flex-direction:column;
+  gap:24px;
+}
+
+.accordion-item{
+  border:1px solid var(--border);
+  border-radius:22px;
+  background:var(--card);
+  padding:0 34px;
+  transition:.3s ease;
+}
+
+.accordion-item:hover{
+  box-shadow:0 18px 45px rgba(0,0,0,.12);
+}
+
+.accordion-header{
+  width:100%;
+  background:none;
+  border:none;
+  padding:26px 0;
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  color:var(--text);
+}
+
+.accordion-header::after{
+  content:"+";
+  font-size:18px;
+  transition:.25s;
+}
+
+.accordion-item.active .accordion-header::after{
+  content:"–";
+}
+
+.accordion-content{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .4s ease;
+}
+
+.accordion-content-inner{
+  padding:0 0 32px;
+  color:var(--muted);
+  font-size:15px;
+  line-height:1.9;
+  max-width:760px;
+}
+
+.accordion-content ul,
+.accordion-content ol{
+  margin:18px 0 0 20px;
+}
+
+.accordion-content li{
+  margin-bottom:12px;
+}
+
+/* CERTIFICATIONS SPECIAL STYLE */
+.accordion-item:last-child .accordion-content-inner p{
+  font-weight:600;
+  letter-spacing:.08em;
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+@media(max-width:1024px){
+  .product-grid{
+    grid-template-columns:1fr;
+    gap:60px;
+  }
+}
+
+@media (max-width: 820px) {
+  .nav-left { display: none; }
+  .menu-btn { display: inline-flex; }
+
+  .logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .logo-main {
+    font-size: 22px;
+  }
+
+  .header-inner {
+    grid-template-columns: auto 1fr auto;
+    padding: 22px 22px;
+  }
+
+  .theme-btn { display: none; }
+
+  .product-section {
+    padding-top: 20px;
+  }
+
+  /* MOBILE PRODUCT ORDER */
+  .product-main {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .product-info h1 {
+    order: 1;
+    font-size: 24px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .product-image {
+    order: 2;
+    border-radius: 14px;
+  }
+
+  .product-info {
+    order: 3;
+    text-align: center;
+  }
+
+  .product-info .subtitle {
+    margin: 0 auto 14px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .product-image img {
+    height: 250px;
+  }
+
+  .product-details{
+    margin-top: 50px;
+    gap: 56px;
+  }
+
+   .accordion{
+    gap:12px;
+    margin:30px 14px 0;
+  }
+
+  .accordion-item{
+    padding:0 14px;
+    border-radius:14px;
+  }
+
+  .accordion-header{
+    padding:16px 0;
+    font-size:11px;
+    letter-spacing:.14em;
+  }
+
+  .accordion-header::after{
+    font-size:16px;
+  }
+
+  .accordion-content-inner{
+    padding-bottom:18px;
+    font-size:13px;
+    line-height:1.6;
+  }
+
+  .accordion-content ul,
+  .accordion-content ol{
+    margin:12px 0 0 16px;
+  }
+
+  .accordion-content li{
+    margin-bottom:8px;
+  }
+
+
+
+  .buy-row {
+    justify-content: center;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .price {
+    font-size: 24px;
+  }
+
+  .buy-btn {
+    width: 100%;
+    max-width: 300px;
+    padding: 15px 32px;
+  }
+
+  .buy-secondary {
+  width: 100%;
+  max-width: 300px;
+  padding: 13px 32px;
+}
+
+  
+
+  .product-details{
+    margin-top: 50px;
+    gap: 56px;
+  }
+
+  .section-title {
+    font-size: 16px;
+    margin-bottom: 34px;
+  }
+
+  /* 🔥 MOBILE SPEC GRID */
+  .spec-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .spec-item {
+    padding: 18px 12px;
+    min-height: 78px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .spec-label {
+    font-size: 10px;
+    margin-bottom: 6px;
+  }
+
+  .spec-value {
+    font-size: 13px;
+  }
+
+  /* 🔥 MOBILE INCLUDES GRID */
+  .includes-wrap {
+    padding: 60px 16px;
+    border-radius: 36px;
+  }
+
+  .includes-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .include-card {
+    padding: 16px 10px;
+    font-size: 12px;
+    min-height: 56px;
+  }
+
+  /* CENTER LAST CARD IF ODD */
+  .includes-grid .include-card:last-child {
+    grid-column: 1 / -1;
+    justify-self: center;
+    max-width: 70%;
+  }
+}
+
+@media (max-width: 420px) {
+  .product-image-wrap img {
+    height: 240px;
+  }
+
+  .spec-item {
+    min-height: 72px;
+  }
+
+  .include-card {
+    min-height: 52px;
+  }
+}
+
+.qty-selector{
+  display:flex;
+  align-items:center;
+  border:1px solid var(--text);
+  border-radius:999px;
+  overflow:hidden;
+}
+
+.qty-selector button{
+  background:none;
+  border:none;
+  width:42px;
+  height:42px;
+  font-size:18px;
+  font-weight:600;
+  color:var(--text);
+}
+
+.qty-selector span{
+  width:40px;
+  text-align:center;
+  font-size:14px;
+  font-weight:600;
+}
+
+/* MOBILE */
+@media (max-width:820px){
+
+  .qty-selector{
+    height:38px;
+  }
+
+  .qty-selector button{
+    width:36px;
+    height:36px;
+    font-size:16px;
+  }
+
+  .qty-selector span{
+    width:34px;
+    font-size:13px;
+  }
+
+}
+
+
+
+
+
+
+/* RTL */
+html[dir="rtl"]{
+  direction:rtl;
+}
+
+html[dir="rtl"] .lang-menu{
+  right:auto;
+  left:0;
+}
+
+html[dir="rtl"] .mobile-menu{
+  left:auto;
+  right:-100%;
+  border-right:none;
+  border-left:1px solid var(--border);
+}
+
+html[dir="rtl"] .mobile-menu.active{
+  right:0;
+}
+
+</style>
+</head>
+
+<body class="dark">
+
+<header>
+<div class="header-inner">
+
+<button class="icon-btn menu-btn" onclick="toggleMenu()">
+<i class="fa-solid fa-bars"></i>
+</button>
+
+<nav class="nav-left">
+<a href="index.html">About Us</a>
+<a href="learn.html">Learn</a>
+<a href="product.html">Product</a>
+</nav>
+
+<div class="logo" onclick="goHome()">
+<span class="logo-main">LUNAVEK</span>
+</div>
+
+<div class="header-actions">
+
+<div class="lang-wrapper">
+<button class="Lang-btn" onclick="toggleLangMenu()" id="LangBtn">EN</button>
+<div class="lang-menu" id="langMenu">
+<button onclick="setLang('en')">EN English</button>
+<button onclick="setLang('fr')">FR Français</button>
+<button onclick="setLang('ar')">AR العربية</button>
+</div>
+</div>
+
+<button class="icon-btn" onclick="goCart()">
+<i class="fa-solid fa-bag-shopping"></i>
+<span class="cart-badge" id="cartBadge">0</span>
+</button>
+
+<button class="icon-btn theme-btn" onclick="toggleTheme()">
+<i class="fa-solid fa-moon"></i>
+</button>
+
+</div>
+</div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+<div class="mobile-top">
+<button class="icon-btn" onclick="toggleMenu()">
+<i class="fa-solid fa-xmark"></i>
+</button>
+<div class="mobile-logo" onclick="goHome()">LUNAVEK</div>
+<button class="icon-btn" onclick="goCart()">
+<i class="fa-solid fa-bag-shopping"></i>
+<span class="cart-badge" id="cartBadgeMobile">0</span>
+</button>
+</div>
+
+<a href="index.html">About Us</a>
+<a href="learn.html">Learn</a>
+<a href="product.html">Product</a>
+
+<div class="mobile-actions">
+<div class="lang-wrapper">
+<button class="Lang-btn" onclick="toggleLangMenuMobile()" id="LangBtnMobile">EN</button>
+<div class="lang-menu" id="langMenuMobile">
+<button onclick="setLang('en')">EN English</button>
+<button onclick="setLang('fr')">FR Français</button>
+<button onclick="setLang('ar')">AR العربية</button>
+</div>
+</div>
+<button class="icon-btn" onclick="toggleTheme()">
+<i class="fa-solid fa-moon"></i>
+</button>
+</div>
+</div>
+
+<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+<section class="product-section">
+
+<div class="product-grid">
+
+<div class="product-image">
+<img src="product1.jpg" alt="Professional LED Facial Mask">
+</div>
+
+<div class="product-info">
+
+<h1>Professional LED Facial Mask</h1>
+
+<p class="subtitle">
+Designed to elevate your skincare routine with gentle, evenly distributed light technology.
+</p>
+
+<div class="buy-row">
+
+<div class="price">$220</div>
+
+<!-- QUANTITY SELECTOR -->
+<div class="qty-selector">
+  <button onclick="decreaseQty()">−</button>
+  <span id="quantity">1</span>
+  <button onclick="increaseQty()">+</button>
+</div>
+
+<button class="buy-btn" onclick="addToCart()">Add to Cart</button>
+<button class="buy-secondary" onclick="buyNow()">Buy Now</button>
+
+</div>
+
+</div>
+</div>
+
+<div class="accordion">
+
+  <div class="accordion-item">
+    <button class="accordion-header">Description</button>
+    <div class="accordion-content">
+      <div class="accordion-content-inner">
+        <p>
+        The Luna Vek LED Facial Mask is designed to elevate your skincare routine with gentle, evenly distributed light technology.
+        </p>
+        <ul>
+        <li>Skin appears more radiant and refreshed</li>
+        <li>Improves look of smoothness and elasticity</li>
+        <li>Supports even-looking tone</li>
+        <li>Softens visible fine lines</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion-item">
+    <button class="accordion-header">How to Use</button>
+    <div class="accordion-content">
+      <div class="accordion-content-inner">
+        <ol>
+        <li>Start with clean, dry skin.</li>
+        <li>Place the mask comfortably.</li>
+        <li>Select preferred light color.</li>
+        <li>Relax for 10 minutes.</li>
+        <li>Continue skincare routine.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion-item">
+    <button class="accordion-header">Certifications & Quality</button>
+    <div class="accordion-content">
+      <div class="accordion-content-inner">
+        <p>MDSAP • ISO 13485 • FDA • CE • FCC • RoHS</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+  <!-- ================= DETAILS ================= -->
+  <div class="product-details">
+
+    <!-- SPECIFICATIONS -->
+    <section>
+      <div class="section-title" data-i18n="specTitle">TECHNICAL SPECIFICATIONS</div>
+
+      <div class="spec-grid">
+        <div class="spec-item">
+          <div class="spec-label">Dimensions</div>
+          <div class="spec-value">310 × 207 × 4.5 mm</div>
+        </div>
+
+        <div class="spec-item">
+          <div class="spec-label">Weight</div>
+          <div class="spec-value">0.38 kg</div>
+        </div>
+
+        <div class="spec-item">
+          <div class="spec-label">USB</div>
+          <div class="spec-value">Type-C</div>
+        </div>
+
+        <div class="spec-item">
+          <div class="spec-label">Input Voltage</div>
+          <div class="spec-value">5V 2A</div>
+        </div>
+
+        <div class="spec-item">
+          <div class="spec-label">Battery</div>
+          <div class="spec-value">5000mAh (7–10 uses)</div>
+        </div>
+
+        <div class="spec-item">
+          <div class="spec-label">Functionality</div>
+          <div class="spec-value">6 modes • Brightness • Pulse</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INCLUDED -->
+    <section class="includes-wrap">
+      <div class="section-title" data-i18n="includesTitle">WHAT YOU’LL RECEIVE</div>
+
+      <div class="includes-grid">
+        <div class="include-card">LED Device</div>
+        <div class="include-card">Velcro Fastener Attachments</div>
+        <div class="include-card">Eye Covers</div>
+        <div class="include-card">USB Charging Cable</div>
+        <div class="include-card">Remote Device</div>
+        <div class="include-card">Drawstring Storage Bag</div>
+        <div class="include-card">Instruction Manual</div>
+      </div>
+    </section>
+
+  </div>
+
+</section>
+
+
+
+
+</section>
+
+<script>
+
+/* THEME */
+function applyTheme(theme){
+if(theme==="dark"){document.body.classList.add("dark");}
+else{document.body.classList.remove("dark");}
+}
+function toggleTheme(){
+const isDark=document.body.classList.toggle("dark");
+localStorage.setItem("theme",isDark?"dark":"light");
+}
+(function(){
+const saved=localStorage.getItem("theme");
+if(saved)applyTheme(saved);
+})();
+
+/* MENU */
+const menu=document.getElementById("mobileMenu");
+const overlay=document.getElementById("overlay");
+function toggleMenu(){
+menu.classList.toggle("active");
+overlay.classList.toggle("active");
+}
+
+/* LANGUAGE */
+const langMenu=document.getElementById("langMenu");
+const langMenuMobile=document.getElementById("langMenuMobile");
+const LangBtn=document.getElementById("LangBtn");
+const LangBtnMobile=document.getElementById("LangBtnMobile");
+
+function toggleLangMenu(){langMenu.classList.toggle("active");}
+function toggleLangMenuMobile(){langMenuMobile.classList.toggle("active");}
+
+function setLang(lang){
+localStorage.setItem("lang",lang);
+if(lang==="ar"){
+document.documentElement.dir="rtl";
+LangBtn.textContent="AR";
+LangBtnMobile.textContent="AR";
+}else if(lang==="fr"){
+document.documentElement.dir="ltr";
+LangBtn.textContent="FR";
+LangBtnMobile.textContent="FR";
+}else{
+document.documentElement.dir="ltr";
+LangBtn.textContent="EN";
+LangBtnMobile.textContent="EN";
+}
+langMenu.classList.remove("active");
+langMenuMobile.classList.remove("active");
+}
+
+/* NAV */
+function goHome(){window.location.href="index.html";}
+function goCart(){window.location.href="cart.html";}
+
+/* CART */
+function updateCart(){
+const cart=JSON.parse(localStorage.getItem("cart"))||[];
+const total=cart.reduce((sum,i)=>sum+i.qty,0);
+const badge=document.getElementById("cartBadge");
+const badgeMobile=document.getElementById("cartBadgeMobile");
+if(total>0){
+badge.textContent=total;
+badge.style.display="inline-block";
+badgeMobile.textContent=total;
+badgeMobile.style.display="inline-block";
+}else{
+badge.style.display="none";
+badgeMobile.style.display="none";
+}
+}
+
+function addToCart(){
+
+  const product = {
+    id: "lunavek-mask",
+    name: "Professional LED Facial Mask",
+    price: 220,
+    qty: currentQty   // ← ВАЖНО
+  };
+
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  const existing = cart.find(i => i.id === product.id);
+
+  if(existing){
+    existing.qty += currentQty;   // ← ВАЖНО
+  } else {
+    cart.push(product);
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+  updateCart();
+}
+
+function buyNow(){
+addToCart();
+goCart();
+}
+
+let currentQty = 1;
+
+function updateQtyDisplay(){
+  const qtyEl = document.getElementById("quantity");
+  if(qtyEl){
+    qtyEl.textContent = currentQty;
+  }
+}
+
+function increaseQty(){
+  currentQty++;
+  updateQtyDisplay();
+}
+
+function decreaseQty(){
+  if(currentQty > 1){
+    currentQty--;
+    updateQtyDisplay();
+  }
+}
+
+/* Инициализация после загрузки */
+document.addEventListener("DOMContentLoaded", function(){
+  updateQtyDisplay();
+});
+
+/* ACCORDION */
+document.querySelectorAll(".accordion-header").forEach(header=>{
+header.addEventListener("click",()=>{
+const item=header.parentElement;
+const content=header.nextElementSibling;
+item.classList.toggle("active");
+if(item.classList.contains("active")){
+content.style.maxHeight=content.scrollHeight+"px";
+}else{
+content.style.maxHeight=null;
+}
+});
+});
+
+/* LOAD */
+(function(){
+const savedLang=localStorage.getItem("lang");
+if(savedLang)setLang(savedLang);
+updateCart();
+})();
+
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+
+  function updateCartBadges(){
+
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const total = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
+
+    const badges = document.querySelectorAll(".cart-badge");
+
+    badges.forEach(function(badge){
+      if(total > 0){
+        badge.textContent = total;
+        badge.style.display = "flex";
+      } else {
+        badge.style.display = "none";
+      }
+    });
+  }
+
+  updateCartBadges();
+
+});
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
