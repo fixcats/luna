@@ -766,7 +766,32 @@
 
 }
 
+@media(max-width:820px){
 
+  /* ❌ скрываем заголовок */
+  .cart-head{
+    display:none;
+  }
+
+@media(max-width:820px){
+
+  .empty-cart{
+    padding-top:0 !important;
+    min-height:100vh;
+    display:flex !important;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+  }
+
+  .empty-cart .cart-empty{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+
+}
 
 
     /* ================= RTL ================= */
@@ -1078,25 +1103,24 @@ document.addEventListener("DOMContentLoaded", function(){
   }
 
   function renderCart(){
-
-  const cart = getCart();
+  
+  const cartPage = document.querySelector(".cart-page");
   const cartHead = document.querySelector(".cart-head");
+  const cart = getCart();
 
   if(cart.length === 0){
-    cartEmpty.style.display="flex";
-    cartItems.style.display="none";
 
-    // ✅ показываем заголовок если корзина пустая
-    cartHead.style.display="block";
+  cartEmpty.style.display="flex";
+  cartItems.style.display="none";
+  cartHead.style.display="block";
 
-    return;
-  }
+  // добавляем класс пустого состояния
+  cartPage.classList.add("empty-cart");
 
-  // ❌ если есть товары — скрываем заголовок
-  cartHead.style.display="none";
+  return;
+}
 
-  cartEmpty.style.display="none";
-  cartItems.style.display="block";
+  cartPage.classList.remove("empty-cart");
 
   cartEmpty.style.display="none";
   cartItems.style.display="block";
@@ -1241,6 +1265,7 @@ document.addEventListener("DOMContentLoaded", function(){
 </script>
 </body>
 </html>
+
 
 
 
