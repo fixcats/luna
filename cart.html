@@ -319,6 +319,7 @@
     }
 
     .cart-empty a {
+      position:relative; 
       margin-top: 10px;
       font-size: 12px;
       font-weight: 700;
@@ -328,60 +329,206 @@
       padding-bottom: 4px;
     }
 
-    /* PRODUCT ROW (WHEN ADDED LATER) */
-    .cart-item {
-      display: grid;
-      grid-template-columns: 120px 1fr auto;
-      gap: 26px;
-      align-items: center;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 26px;
-    }
+    /* ================= CART ITEMS REDESIGN ================= */
 
-    .cart-item img {
-      width: 120px;
-      border-radius: 14px;
-      object-fit: cover;
-    }
+.cart-items-wrapper{
+  display:flex;
+  flex-direction:column;
+  gap:60px;
+}
 
-    .cart-info h3 {
-      font-size: 16px;
-      margin-bottom: 6px;
-      font-weight: 600;
-    }
+.cart-item{
+  position:relative;
+  display:grid;
+  grid-template-columns:clamp(90px,22vw,160px) 1fr;
+  gap:clamp(14px,3vw,30px);
+  align-items:center;
 
-    .cart-info span {
-      font-size: 13px;
-      color: var(--muted);
-    }
+  width:100%;
+  max-width:100%;
+  padding:clamp(16px,3vw,30px);
+  border-bottom:1px solid var(--border);
+}
 
-    .cart-price {
-      font-size: 14px;
-      font-weight: 600;
-    }
 
-    .checkout-bar {
-      margin-top: 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 30px;
-      border-top: 1px solid var(--border);
-      padding-top: 26px;
-    }
+.cart-item-image{
+  width:160px;
+  height:160px;
+  border-radius:18px;
+  overflow:hidden;
+}
 
-    .checkout-total {
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-    }
+.cart-item-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
 
-    .checkout-btns {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
+.cart-item-info{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+.cart-item-info h3{
+  font-size:18px;
+  font-weight:600;
+}
+
+.qty-control{
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+
+.qty-control button{
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  border:1px solid var(--border);
+  background:transparent;
+  color:var(--text);
+  font-size:14px;
+  font-weight:600;
+  cursor:pointer;
+  transition:.25s;
+}
+
+.qty-control button:hover{
+  background:var(--text);
+  color:var(--bg);
+}
+
+.qty-control span{
+  min-width:22px;
+  text-align:center;
+  font-weight:600;
+}
+
+.cart-item-price{
+  font-size:18px;
+  font-weight:600;
+}
+
+.remove-btn{
+  position:absolute;
+  right:12px;
+  bottom:12px;
+  font-size: 18px;
+  width:36px;
+  height:36px;
+
+  border-radius:50%;
+  border:1px solid var(--border);
+  background:var(--bg);
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  color:var(--muted);
+  cursor:pointer;
+  transition:.25s;
+}
+
+.remove-btn:hover{
+  background:#ff3b30;
+  border-color:#ff3b30;
+  color:#fff;
+}
+
+/* ================= CHECKOUT BAR ================= */
+
+.checkout-bar{
+  margin-top:60px;
+  padding-top:30px;
+  border-top:1px solid var(--border);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:40px;
+}
+
+.checkout-total{
+  font-size:18px;
+  font-weight:700;
+  letter-spacing:.08em;
+}
+
+.checkout-actions{
+  display:flex;
+  gap:16px;
+}
+
+.checkout-btn{
+  padding:14px 38px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition:.25s;
+}
+
+.checkout-btn.primary{
+  background:var(--text);
+  color:var(--bg);
+  border:1px solid var(--text);
+}
+
+.checkout-btn.secondary{
+  background:transparent;
+  border:1px solid var(--text);
+  color:var(--text);
+}
+
+.checkout-btn:hover{
+  transform:translateY(-2px);
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:820px){
+
+  .cart-items-wrapper{
+    gap:32px;
+  }
+
+  .cart-item{
+    grid-template-columns:90px 1fr;
+    gap:16px;
+    padding-bottom:24px;
+  }
+
+  .cart-item-image{
+    width:90px;
+    height:90px;
+    border-radius:12px;
+  }
+
+  .cart-item-price{
+    grid-column:2;
+    font-size:16px;
+    margin-top:6px;
+  }
+
+  .checkout-bar{
+    flex-direction:column;
+    align-items:stretch;
+    gap:20px;
+  }
+
+  .checkout-actions{
+    flex-direction:column;
+  }
+
+  .checkout-btn{
+    width:100%;
+  }
+}
+
 
     .pay-btn {
       padding: 12px 28px;
@@ -407,6 +554,29 @@
       box-shadow: 0 12px 30px rgba(0,0,0,.15);
     }
 
+    .trash-btn{
+      position:absolute;
+      right:16px;
+      bottom:16px;
+      width:34px;
+      height:34px;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:transparent;
+      border:1px solid var(--border);
+      color:var(--muted);
+      cursor:pointer;
+      transition:.25s;
+    }
+
+    .trash-btn:hover{
+      background:#ff3b30;
+      border-color:#ff3b30;
+      color:#fff;
+    }
+
     /* CONTACT */
     .cart-contact {
       text-align: center;
@@ -416,6 +586,13 @@
     }
 
     /* ================= RESPONSIVE ================= */
+
+    @media(max-width:820px){
+    .trash-btn{
+      right:12px;
+      bottom:12px;
+    }
+   }
     @media (max-width: 820px) {
       .nav-left { display: none; }
       .menu-btn { display: inline-flex; }
@@ -458,6 +635,144 @@
         justify-content: center;
       }
     }
+
+    .qty-control{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-top:10px;
+}
+
+.qty-control button{
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  border:1px solid var(--border);
+  background:var(--button-bg);
+  color:var(--button-text);
+  cursor:pointer;
+  font-weight:700;
+  transition:.2s;
+}
+
+.qty-control button:hover{
+  background:var(--text);
+  color:var(--bg);
+}
+
+.remove-btn{
+  background:none;
+  border:none;
+  color:var(--danger);
+  cursor:pointer;
+  font-weight:500;
+}
+
+.remove-btn:hover{
+  opacity:1;
+}
+
+@media(max-width:820px){
+  .cart-title{
+    font-size:22px;
+    margin-bottom:25px;
+  }
+
+  .cart-item{
+    position:relative;
+    display:grid;
+    width:100%;
+    max-width:100%;
+    padding:clamp(16px,3vw,30px);
+    grid-template-columns:clamp(90px,22vw,160px) 1fr;
+    padding:16px;
+    border:1px solid var(--border);
+    border-radius:14px;
+    transition:0.3s ease;
+    grid-template-columns:90px 1fr;
+    gap:14px;
+  }
+
+  
+
+  .cart-item{
+  overflow:hidden; /* обрезает всё что выходит за границы */
+}
+
+.cart-item img{
+  width:100%;
+  height:100%;
+  object-fit:cover; /* картинка не растягивается */
+  display:block;
+}
+
+  .cart-item img{
+    border-radius:12px;
+  }
+
+  .cart-info h3{
+    font-size:16px;
+  }
+
+  .cart-price{
+    grid-column:2;
+    text-align:left;
+    font-size:16px;
+    margin-top:6px;
+  }
+
+  .qty-control{
+    margin-top:8px;
+  }
+
+  .qty-control button{
+    width:32px;
+    height:32px;
+  }
+
+  .remove-btn{
+    font-size:16px;
+  }
+
+  .checkout-bar{
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    background:var(--bg);
+    padding:18px 20px;
+    border-top:1px solid var(--border);
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+    z-index:100;
+  }
+
+  .checkout-total{
+    font-size:18px;
+  }
+
+  .pay-btn{
+    width:100%;
+  }
+}
+
+@media(max-width:820px){
+
+  .cart-page{
+    padding:20px 16px 120px;
+    gap:30px;
+  }
+
+}
+
+@media(max-width:820px){
+
+  /* ❌ скрываем заголовок */
+  .cart-head{
+    display:none;
+  }
+
 
     /* ================= RTL ================= */
     html[dir="rtl"] { direction: rtl; }
@@ -718,8 +1033,209 @@ document.addEventListener("DOMContentLoaded", function(){
 });
 </script>
 
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+
+  const cartItems = document.getElementById("cartItems");
+  const cartEmpty = document.getElementById("cartEmpty");
+
+  function getCart(){
+    return JSON.parse(localStorage.getItem("cart")) || [];
+  }
+
+  function saveCart(cart){
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }
+
+  function updateBadge(){
+    const cart = getCart();
+    const total = cart.reduce((sum,i)=> sum + i.qty, 0);
+    document.querySelectorAll(".cart-badge").forEach(b=>{
+      if(total>0){
+        b.textContent = total;
+        b.style.display="flex";
+      } else {
+        b.style.display="none";
+      }
+    });
+  }
+
+  function changeQty(index, amount){
+    const cart = getCart();
+
+    cart[index].qty += amount;
+
+    if(cart[index].qty <= 0){
+      cart.splice(index,1);
+    }
+
+    saveCart(cart);
+    renderCart();
+    updateBadge();
+  }
+
+  function removeItem(index){
+    const cart = getCart();
+    cart.splice(index,1);
+    saveCart(cart);
+    renderCart();
+    updateBadge();
+  }
+
+  function renderCart(){
+
+  const cart = getCart();
+
+  if(cart.length === 0){
+    cartEmpty.style.display="flex";
+    cartItems.style.display="none";
+    return;
+  }
+
+  cartEmpty.style.display="none";
+  cartItems.style.display="block";
+  cartItems.innerHTML = '<div class="cart-items-wrapper"></div>';
+
+  const wrapper = cartItems.querySelector(".cart-items-wrapper");
+
+  let totalPrice = 0;
+
+  cart.forEach((item,index)=>{
+
+    totalPrice += item.price * item.qty;
+
+    const row = document.createElement("div");
+    row.className="cart-item";
+
+    row.innerHTML = `
+  <div class="cart-item-image">
+    <img src="${item.image || 'product1.jpg'}">
+  </div>
+
+  <div class="cart-item-info">
+    <h3>${item.name}</h3>
+
+    <div class="qty-control">
+      <button onclick="changeQty(${index}, -1)">−</button>
+      <span>${item.qty}</span>
+      <button onclick="changeQty(${index}, 1)">+</button>
+    </div>
+
+    <div class="cart-item-price">
+      $${item.price * item.qty}
+      <button class="remove-btn" onclick="removeItem(${index})">
+        <i class="fa-regular fa-trash-can"></i>
+      </button>
+    </div>
+  </div>
+`;
+
+    wrapper.appendChild(row);
+  });
+
+  const checkout = document.createElement("div");
+  checkout.className="checkout-bar";
+  checkout.innerHTML = `
+    <div class="checkout-total">
+      Total — $${totalPrice}
+    </div>
+    <div class="checkout-actions">
+      <button class="checkout-btn secondary" onclick="window.location='product.html'">
+        Continue Shopping
+      </button>
+      <button class="checkout-btn primary">
+        Checkout
+      </button>
+    </div>
+  `;
+
+  cartItems.appendChild(checkout);
+}
+
+
+  // делаем функции глобальными
+  window.changeQty = changeQty;
+  window.removeItem = removeItem;
+
+  renderCart();
+  updateBadge();
+
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+
+  const minusBtn = document.getElementById("minus");
+  const plusBtn = document.getElementById("plus");
+  const qtyDisplay = document.getElementById("quantity");
+  const addBtn = document.getElementById("addToCart");
+
+  let qty = 1;
+
+  function updateQty(){
+    qtyDisplay.textContent = qty;
+  }
+
+  minusBtn.addEventListener("click", ()=>{
+    if(qty > 1){
+      qty--;
+      updateQty();
+    }
+  });
+
+  plusBtn.addEventListener("click", ()=>{
+    qty++;
+    updateQty();
+  });
+
+  addBtn.addEventListener("click", ()=>{
+
+    const product = {
+      id: "lunavek-mask",
+      name: "Professional LED Facial Mask",
+      price: 220,
+      qty: qty,
+      image: "product1.jpg"
+    };
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    const existing = cart.find(item => item.id === product.id);
+
+    if(existing){
+      existing.qty += qty;
+    } else {
+      cart.push(product);
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    updateBadge();
+
+  });
+
+  function updateBadge(){
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const total = cart.reduce((sum,i)=> sum + i.qty, 0);
+
+    document.querySelectorAll(".cart-badge").forEach(b=>{
+      if(total > 0){
+        b.textContent = total;
+        b.style.display = "flex";
+      } else {
+        b.style.display = "none";
+      }
+    });
+  }
+
+  updateBadge();
+
+});
+</script>
 </body>
 </html>
+
 
 
 
