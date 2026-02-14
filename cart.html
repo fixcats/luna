@@ -766,12 +766,7 @@
 
 }
 
-@media(max-width:820px){
 
-  /* ❌ скрываем заголовок */
-  .cart-head{
-    display:none;
-  }
 
 
     /* ================= RTL ================= */
@@ -1085,12 +1080,23 @@ document.addEventListener("DOMContentLoaded", function(){
   function renderCart(){
 
   const cart = getCart();
+  const cartHead = document.querySelector(".cart-head");
 
   if(cart.length === 0){
     cartEmpty.style.display="flex";
     cartItems.style.display="none";
+
+    // ✅ показываем заголовок если корзина пустая
+    cartHead.style.display="block";
+
     return;
   }
+
+  // ❌ если есть товары — скрываем заголовок
+  cartHead.style.display="none";
+
+  cartEmpty.style.display="none";
+  cartItems.style.display="block";
 
   cartEmpty.style.display="none";
   cartItems.style.display="block";
@@ -1235,6 +1241,7 @@ document.addEventListener("DOMContentLoaded", function(){
 </script>
 </body>
 </html>
+
 
 
 
