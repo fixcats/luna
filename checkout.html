@@ -1,436 +1,1266 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title data-i18n="checkoutTitle">Checkout — LUNAVEK</title>
+<title>LUNAVEK — Checkout</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Didot&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
 
-/* ================= GLOBAL ================= */
+/* =========================
+   RESET
+========================= */
 
-:root{
-  --bg:#111;
-  --card:#1c1c1c;
-  --text:#fff;
-  --muted:#aaa;
-  --border:rgba(255,255,255,.08);
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-body{
-  margin:0;
-  font-family:Inter,sans-serif;
-  background:var(--bg);
-  color:var(--text);
+body {
+  font-family: Inter, system-ui, sans-serif;
+  min-height: 100vh;
+  transition: background .3s, color .3s;
 }
 
-/* ================= HEADER (как на остальных страницах) ================= */
+/* =========================
+   THEME VARIABLES
+========================= */
 
-header{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:70px;
-  background:rgba(17,17,17,.9);
-  backdrop-filter:blur(10px);
+:root {
+  --bg: #ffffff;
+  --text: #111111;
+  --muted: #666666;
+  --card: #ffffff;
+  --border: rgba(0,0,0,0.08);
+  --accent: #000000;
+}
+
+body.dark {
+  --bg: #1b1b1b;
+  --text: #ffffff;
+  --muted: #bbbbbb;
+  --card: #222222;
+  --border: rgba(255,255,255,0.12);
+  --accent: #ffffff;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+a { text-decoration: none; color: inherit; }
+button { font-family: inherit; cursor: pointer; }
+
+ /* ================= HEADER ================= */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      max-width: 1800px;
+      margin: auto;
+      padding: 16px 22px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+    }
+
+    /* LEFT NAV (DESKTOP) */
+    .nav-left {
+      display: flex;
+      gap: 34px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .nav-left a {
+      color: var(--text);
+      opacity: .85;
+      transition: .25s;
+      position: relative;
+    }
+
+    .nav-left a:hover { opacity: 1; }
+
+    .nav-left a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 0;
+      height: 1px;
+      background: var(--text);
+      transition: .25s;
+    }
+
+    .nav-left a:hover::after { width: 100%; }
+
+    /* LOGO */
+    .logo {
+      justify-self: center;
+      text-align: center;
+      cursor: pointer;
+      line-height: 1.1;
+    }
+
+    .logo-main {
+      font-family: "Didot", "Playfair Display", serif;
+      font-size: 28px;
+      font-weight: 500;
+      letter-spacing: .32em;
+    }
+
+    /* HEADER ACTIONS */
+.header-actions{
+  justify-self:end;
   display:flex;
   align-items:center;
-  justify-content:space-between;
-  padding:0 40px;
-  box-sizing:border-box;
-  z-index:1000;
-  border-bottom:1px solid var(--border);
+  gap:18px;
 }
 
-.logo{
+.icon-btn{
+  background:none;
+  border:none;
   font-size:20px;
-  font-weight:600;
-  letter-spacing:.15em;
-  cursor:pointer;
-}
-
-nav{
-  display:flex;
-  gap:30px;
-  align-items:center;
-}
-
-nav a{
-  text-decoration:none;
   color:var(--text);
-  font-size:13px;
-  letter-spacing:.12em;
-  font-weight:500;
-}
-
-.lang-wrapper{
-  cursor:pointer;
-  font-size:13px;
-  letter-spacing:.12em;
-  font-weight:500;
-}
-
-.cart-icon{
+  transition:.25s;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   position:relative;
 }
 
-.cart-count{
+.icon-btn:hover{
+  opacity:.7;
+}
+
+/* CART BADGE */
+.cart-badge{
   position:absolute;
   top:-6px;
   right:-8px;
-  background:white;
-  color:black;
+  background:var(--text);
+  color:var(--bg);
   font-size:10px;
-  padding:2px 5px;
-  border-radius:50%;
+  font-weight:700;
+  padding:2px 6px;
+  border-radius:999px;
   display:none;
 }
 
-/* ================= CHECKOUT ================= */
+    /* RIGHT ACTIONS */
+    .header-actions {
+      justify-self: end;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
 
-.checkout-container{
-  max-width:1200px;
-  margin:auto;
-  padding:120px 30px 60px;
-  display:grid;
-  grid-template-columns:1fr 420px;
-  gap:60px;
+    .icon-btn {
+      background: none;
+      border: none;
+      font-size: 20px;
+      color: var(--text);
+      cursor: pointer;
+      transition: .25s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .icon-btn:hover { opacity: .7; }
+
+    /* LANGUAGE DROPDOWN */
+    .lang-wrapper { position: relative; }
+
+    .Lang-btn {
+      background: none;
+      border: none;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      cursor: pointer;
+      color: var(--text);
+    }
+
+    .lang-menu {
+      position: absolute;
+      right: 0;
+      top: 130%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: 0 12px 32px rgba(0,0,0,.2);
+      padding: 6px;
+      display: none;
+      flex-direction: column;
+      min-width: 150px;
+      z-index: 300;
+    }
+
+    .lang-menu.active { display: flex; }
+
+    .lang-menu button {
+      background: none;
+      border: none;
+      padding: 10px 12px;
+      text-align: left;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      color: var(--text);
+      border-radius: 8px;
+      transition: .2s;
+    }
+
+    .lang-menu button:hover {
+      background: rgba(0,0,0,.06);
+    }
+
+    body.dark .lang-menu button:hover {
+      background: rgba(255,255,255,.08);
+    }
+
+    /* MOBILE MENU BUTTON */
+    .menu-btn { display: none; }
+
+    /* ================= MOBILE DRAWER ================= */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      left: -100%;
+      width: 300px;
+      height: 100vh;
+      background: var(--bg);
+      border-right: 1px solid var(--border);
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 26px;
+      transition: .35s ease;
+      z-index: 250;
+    }
+
+    .mobile-menu.active { left: 0; }
+
+    .mobile-top {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .mobile-logo {
+      text-align: center;
+      font-family: "Didot", serif;
+      font-size: 22px;
+      letter-spacing: .28em;
+      cursor: pointer;
+    }
+
+    .mobile-menu a {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    .mobile-actions {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.45);
+      opacity: 0;
+      pointer-events: none;
+      transition: .3s;
+      z-index: 220;
+    }
+
+    .overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+
+/* =========================
+   CHECKOUT LAYOUT
+========================= */
+
+.checkout-container {
+  max-width: 1200px;
+  margin: 60px auto;
+  padding: 0 22px 80px;
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap: 60px;
 }
 
-h1{
-  font-size:32px;
-  margin-bottom:40px;
+.checkout-left,
+.checkout-right {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 40px;
 }
 
-.form-group{
-  margin-bottom:18px;
-  display:flex;
-  flex-direction:column;
+.checkout-left h2,
+.checkout-right h2 {
+  font-size: 18px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  margin-bottom: 30px;
 }
 
-.form-group label{
-  font-size:12px;
-  margin-bottom:6px;
-  color:var(--muted);
-  letter-spacing:.08em;
+.form-group {
+  margin-bottom: 22px;
 }
 
-.form-group input{
-  padding:14px;
-  border-radius:8px;
-  border:1px solid var(--border);
-  background:var(--card);
-  color:var(--text);
-  font-size:14px;
+.form-group label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
 }
 
-.form-row{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:14px;
+.form-group input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
 }
 
-.payment-option{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:12px;
-  border:1px solid var(--border);
-  border-radius:8px;
-  margin-bottom:10px;
-  cursor:pointer;
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
 }
 
-.payment-option input{
-  accent-color:white;
+/* =========================
+   PREMIUM PAYMENT METHODS
+========================= */
+
+.payment-options {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-.summary{
-  background:var(--card);
-  padding:30px;
-  border-radius:12px;
-  height:fit-content;
+.payment-option {
+  position: relative;
 }
 
-.summary h2{
-  font-size:16px;
-  margin-bottom:20px;
-  letter-spacing:.1em;
+.payment-option input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
 }
 
-.summary-total{
-  display:flex;
-  justify-content:space-between;
-  margin-top:20px;
-  font-weight:700;
-  font-size:18px;
+.payment-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  cursor: pointer;
+  transition: .25s ease;
 }
 
-.pay-btn{
-  margin-top:30px;
-  width:100%;
-  padding:16px;
-  border-radius:999px;
-  border:none;
-  background:white;
-  color:black;
-  font-weight:700;
-  letter-spacing:.12em;
-  cursor:pointer;
+.payment-card:hover {
+  border-color: var(--text);
 }
 
-/* ================= MOBILE ================= */
+.payment-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
 
-@media(max-width:900px){
+.payment-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: rgba(0,0,0,.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
 
-  header{
-    padding:0 20px;
+body.dark .payment-icon {
+  background: rgba(255,255,255,.08);
+}
+
+.payment-title {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.payment-check {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: .25s;
+}
+
+.payment-check::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--text);
+  transform: scale(0);
+  transition: .25s;
+}
+
+/* ACTIVE STATE */
+
+.payment-option input:checked + .payment-card {
+  border-color: var(--text);
+  box-shadow: 0 8px 24px rgba(0,0,0,.06);
+}
+
+body.dark .payment-option input:checked + .payment-card {
+  box-shadow: 0 8px 24px rgba(0,0,0,.4);
+}
+
+.payment-option input:checked + .payment-card .payment-check {
+  border-color: var(--text);
+}
+
+.payment-option input:checked + .payment-card .payment-check::after {
+  transform: scale(1);
+}
+
+.place-order {
+  margin-top: 30px;
+  width: 100%;
+  padding: 16px;
+  border-radius: 999px;
+  border: none;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  background: var(--accent);
+  color: var(--bg);
+  transition: .25s;
+}
+
+.place-order:hover {
+  opacity: .9;
+}
+
+/* =========================
+   ORDER SUMMARY
+========================= */
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+.summary-total {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 1024px) {
+      .why-row { grid-template-columns: 1fr; gap: 50px; }
+      .why-row.reverse { direction: ltr; }
+    }
+
+    @media (max-width: 820px) {
+      .nav-left { display: none; }
+      .menu-btn { display: inline-flex; }
+
+      .logo {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+      }  
+
+      .logo-main {
+        font-size: 22px;
+      }
+
+      .header-inner {
+        grid-template-columns: auto 1fr auto;
+        padding: 22px 22px; 
+      }
+
+      /* hide theme toggle in header on mobile */
+      .theme-btn { display: none; }
+
+      .hero-content {
+        left: 50%;
+        bottom: 60px;
+        transform: translateX(-50%);
+        text-align: center;
+        max-width: 90%;
+      }
+
+      .hero::after {
+        height: 65%;
+      }
+
+      .hero-buttons {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .hero h1 { font-size: 30px; }
+      .hero p { font-size: 15px; }
+    }
+
+    @media (max-width: 900px) {
+
+  /* Главный контейнер */
+  .checkout-container {
+    grid-template-columns: 1fr !important;
+    gap: 18px;
+    margin: 20px auto 50px;
+    padding: 0 14px;
   }
+
+  /* Меняем порядок — summary сверху */
+  .checkout-right {
+    order: -1;
+  }
+
+  /* Карточки */
+  .checkout-left,
+  .checkout-right {
+    padding: 20px;
+    border-radius: 16px;
+  }
+
+  /* Заголовки */
+  .checkout-left h2,
+  .checkout-right h2 {
+    font-size: 14px;
+    margin-bottom: 16px;
+    letter-spacing: .14em;
+  }
+
+  /* Формы */
+  .form-group {
+    margin-bottom: 12px;
+  }
+
+  .form-group label {
+    font-size: 10px;
+    margin-bottom: 4px;
+  }
+
+  .form-group input {
+    padding: 10px 12px;
+    font-size: 13px;
+    border-radius: 10px;
+  }
+
+  /* Две колонки в одну */
+  .row {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  /* Payment methods компактно */
+  .payment-options {
+    gap: 10px;
+    margin-top: 12px;
+  }
+
+  .payment-card {
+    padding: 12px 14px;
+    border-radius: 12px;
+  }
+
+  .payment-icon {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+    border-radius: 8px;
+  }
+
+  .payment-title {
+    font-size: 12px;
+  }
+
+  .payment-check {
+    width: 18px;
+    height: 18px;
+  }
+
+  .payment-check::after {
+    width: 7px;
+    height: 7px;
+  }
+
+  /* Кнопка */
+  .place-order {
+    padding: 12px;
+    font-size: 12px;
+    letter-spacing: .1em;
+    margin-top: 18px;
+  }
+
+  /* Summary */
+  .summary-item {
+    font-size: 12px;
+    margin-bottom: 8px;
+  }
+
+  .summary-total {
+    font-size: 14px;
+    margin-top: 12px;
+    padding-top: 10px;
+  }
+
+}
+
+/* =========================
+   MOBILE FLAT CHECKOUT
+========================= */
+
+@media (max-width: 900px){
+
+  /* Одна колонка */
+  .checkout-container{
+    grid-template-columns: 1fr !important;
+    margin: 10px auto 40px;
+    padding: 0 16px;
+    gap: 0;
+  }
+
+  /* Убираем карточный стиль */
+  .checkout-left,
+  .checkout-right{
+    background: transparent;
+    border: none;
+    padding: 0;
+    border-radius: 0;
+  }
+
+  /* Your order в конец */
+  .checkout-right{
+    order: 2;
+    margin-top: 25px;
+  }
+
+  .checkout-left{
+    order: 1;
+  }
+
+  /* Заголовки компактно */
+  .checkout-left h2,
+  .checkout-right h2{
+    font-size: 14px;
+    margin: 20px 0 14px;
+    letter-spacing: .14em;
+  }
+
+  /* Поля */
+  .form-group{
+    margin-bottom: 12px;
+  }
+
+  .form-group label{
+    font-size: 10px;
+    margin-bottom: 4px;
+  }
+
+  .form-group input{
+    padding: 10px 12px;
+    font-size: 13px;
+    border-radius: 10px;
+  }
+
+  .row{
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  /* Payment компакт */
+  .payment-options{
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .payment-card{
+    padding: 12px 14px;
+    border-radius: 12px;
+  }
+
+  .payment-icon{
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+  }
+
+  .payment-title{
+    font-size: 12px;
+  }
+
+  /* Order summary стиль */
+  .summary-item{
+    font-size: 12px;
+    margin-bottom: 8px;
+  }
+
+  .summary-total{
+    font-size: 14px;
+    margin-top: 10px;
+    padding-top: 10px;
+  }
+
+  /* Кнопка ВНИЗУ после total */
+  .place-order{
+    margin-top: 18px;
+    padding: 13px;
+    font-size: 12px;
+    letter-spacing: .1em;
+  }
+
+}
+
+
+/* ====================================
+   MOBILE DARK MODE FIX (BUTTON THEME)
+==================================== */
+
+@media (max-width: 900px){
 
   .checkout-container{
-    grid-template-columns:1fr;
-    padding:100px 20px 40px;
-    gap:40px;
+    display:flex;
+    flex-direction:column;
+    margin:0 auto 60px;
+    padding:0 18px;
   }
 
-  .form-row{
-    grid-template-columns:1fr;
+  /* Убираем desktop-блоки */
+  .checkout-left,
+  .checkout-right{
+    background:transparent;
+    border:none;
+    padding:0;
+    border-radius:0;
   }
 
+  /* Порядок */
+  .checkout-left{ order:1; }
+  .checkout-right{ order:2; }
+
+  /* Заголовки */
+  .checkout-left h2,
+  .checkout-right h2{
+    font-size:13px;
+    letter-spacing:.18em;
+    margin:30px 0 16px;
+    font-weight:600;
+    padding-top:24px;
+    border-top:1px solid var(--border);
+  }
+
+  .checkout-left h2:first-child{
+    padding-top:0;
+    border-top:none;
+  }
+
+  /* Форма */
+  .form-group{
+    margin-bottom:14px;
+  }
+
+  .form-group label{
+    font-size:10px;
+    letter-spacing:.08em;
+    margin-bottom:6px;
+    color:var(--text-secondary);
+  }
+
+  .form-group input{
+    width:100%;
+    padding:12px 14px;
+    font-size:14px;
+    border-radius:12px;
+    border:1px solid var(--border);
+    background:var(--card-bg);
+    color:var(--text-main);
+    transition:.2s ease;
+  }
+
+  .form-group input:focus{
+    border-color:var(--text-main);
+    box-shadow:0 0 0 2px rgba(0,0,0,0.05);
+  }
+
+  .row{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+
+  /* Payment */
+  .payment-options{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    margin-top:10px;
+  }
+
+  .payment-card{
+    padding:14px 16px;
+    border-radius:14px;
+    border:1px solid var(--border);
+    background:var(--card-bg);
+    transition:.2s ease;
+  }
+
+  .payment-card.active{
+    border-color:var(--text-main);
+  }
+
+  .payment-title{
+    font-size:13px;
+    font-weight:500;
+  }
+
+  /* Order summary */
+  .checkout-right{
+    margin-top:30px;
+  }
+
+  .summary-item{
+    display:flex;
+    justify-content:space-between;
+    font-size:13px;
+    margin-bottom:10px;
+    color:var(--text-secondary);
+  }
+
+  .summary-total{
+    display:flex;
+    justify-content:space-between;
+    font-size:15px;
+    font-weight:600;
+    margin-top:18px;
+    padding-top:14px;
+    border-top:1px solid var(--border);
+    color:var(--text-main);
+  }
+
+  /* Кнопка */
+  /* =========================
+   MOBILE PLACE ORDER BUTTON
+========================= */
+
+@media (max-width:900px){
+
+  .place-order{
+    position:relative;
+    width:100%;
+
+    padding:18px;
+    margin-top:28px;
+
+    font-size:14px;
+    font-weight:600;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+
+    border:none;
+    border-radius:18px;
+
+    background:var(--button-bg);
+    color:var(--button-text);
+
+    transition:all .25s ease;
+  }
+
+  /* лёгкий объём */
+    .place-order{
+    position:relative;
+    width:100%;
+
+    padding:18px;
+    margin-top:28px;
+
+    font-size:14px;
+    font-weight:600;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+
+    border-radius:18px;
+
+    background:var(--button-bg);
+    color:var(--button-text);
+
+    /* 👇 Главное — добавляем контраст */
+    border:2px solid var(--text-main);
+
+    box-shadow:
+      0 8px 22px rgba(0,0,0,0.15),
+      0 0 0 4px rgba(0,0,0,0.03);
+
+    transition:all .25s ease;
+  }
+
+  .place-order:active{
+    transform:scale(.96);
+    box-shadow:
+      0 4px 10px rgba(0,0,0,0.2);
+  }
+
+}
+}
+
+
+
+
+/* =========================
+   RTL
+========================= */
+
+html[dir="rtl"] {
+  direction: rtl;
+}
+
+html[dir="rtl"] .lang-menu {
+  right: auto;
+  left: 0;
 }
 
 </style>
 </head>
-<body>
 
+<body class="dark">
+
+<!-- ================= HEADER ================= -->
 <header>
-  <div class="logo" onclick="location.href='index.html'">LUNAVEK</div>
+  <div class="header-inner">
 
-  <nav>
-    <a href="index.html" data-i18n="home">HOME</a>
-    <a href="learn.html" data-i18n="learn">LEARN</a>
-    <a href="product.html" data-i18n="product">PRODUCT</a>
-    <a href="cart.html" class="cart-icon">
+    <!-- LEFT (MENU BUTTON ON MOBILE) -->
+    <button class="icon-btn menu-btn" onclick="toggleMenu()" aria-label="Menu">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <!-- LEFT NAV (DESKTOP) -->
+    <nav class="nav-left">
+      <a href="#" data-i18n="about">About Us</a>
+      <a href="learn.html" data-i18n="learn">Learn</a>
+      <a href="product.html">Product</a>
+    </nav>
+
+    <!-- LOGO CENTER -->
+    <div class="logo" onclick="goHome()">
+      <span class="logo-main">LUNAVEK</span>
+    </div>
+
+    <!-- RIGHT ACTIONS -->
+    <div class="header-actions">
+
+      <!-- LANGUAGE -->
+      <div class="lang-wrapper">
+        <button class="Lang-btn" onclick="toggleLangMenu()" id="LangBtn">EN</button>
+        <div class="lang-menu" id="langMenu">
+          <button onclick="setLang('en')">EN English</button>
+          <button onclick="setLang('fr')">FR Français</button>
+          <button onclick="setLang('ar')">AR العربية</button>
+        </div>
+      </div>
+
+      <!-- CART -->
+      <a href="cart.html" class="icon-btn" aria-label="Cart">
       <i class="fa-solid fa-bag-shopping"></i>
-      <span class="cart-count" id="cartCount">0</span>
-    </a>
-    <div class="lang-wrapper" onclick="toggleLang()">EN</div>
-  </nav>
+      <span class="cart-badge" id="cartBadge">0</span>
+      </a>
+
+      <!-- THEME (DESKTOP ONLY) -->
+      <button class="icon-btn theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">
+        <i class="fa-solid fa-moon"></i>
+      </button>
+
+    </div>
+
+  </div>
 </header>
+
+<!-- ================= MOBILE MENU ================= -->
+<div class="mobile-menu" id="mobileMenu">
+
+  <div class="mobile-top">
+    <button class="icon-btn" onclick="toggleMenu()"><i class="fa-solid fa-xmark"></i></button>
+    <div class="mobile-logo" onclick="goHome()">LUNAVEK</div>
+    <button class="icon-btn"><i class="fa-solid fa-bag-shopping"></i>
+    <span class="cart-badge" id="cartBadge">0</span>
+    </button>
+  </div>
+
+  <a href="#" data-i18n="about">About Us</a>
+  <a href="learn.html" data-i18n="learn">Learn</a>
+  <a href="product.html">Product</a>
+
+  <div class="mobile-actions">
+    <div class="lang-wrapper">
+      <button class="Lang-btn" onclick="toggleLangMenuMobile()" id="LangBtnMobile">EN</button>
+      <div class="lang-menu" id="langMenuMobile">
+        <button onclick="setLang('en')">EN English</button>
+        <button onclick="setLang('fr')">FR Français</button>
+        <button onclick="setLang('ar')">AR العربية</button>
+      </div>
+    </div>
+
+    <!-- THEME BUTTON ONLY IN MOBILE MENU -->
+    <button class="icon-btn" onclick="toggleTheme()"><i class="fa-solid fa-moon"></i></button>
+  </div>
+
+</div>
+
+<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
 <div class="checkout-container">
 
-<div>
-<h1 data-i18n="checkout">Checkout</h1>
+  <div class="checkout-left">
+    <h2>Billing Details</h2>
 
-<form id="checkoutForm">
+    <div class="form-group">
+      <label>Full Name</label>
+      <input type="text">
+    </div>
 
-<div class="form-row">
-  <div class="form-group">
-    <label data-i18n="firstName">First Name *</label>
-    <input type="text" required>
+    <div class="row">
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email">
+      </div>
+
+      <div class="form-group">
+        <label>Phone</label>
+        <input type="tel">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Address</label>
+      <input type="text">
+    </div>
+
+    <div class="row">
+      <div class="form-group">
+        <label>City</label>
+        <input type="text">
+      </div>
+
+      <div class="form-group">
+        <label>Postal Code</label>
+        <input type="text">
+      </div>
+    </div>
+
+    <h2 style="margin-top:40px;">Payment Method</h2>
+
+<div class="payment-options">
+
+  <label class="payment-option">
+    <input type="radio" name="payment" checked>
+    <div class="payment-card">
+      <div class="payment-left">
+        <div class="payment-icon">
+          <i class="fa-regular fa-credit-card"></i>
+        </div>
+        <div class="payment-title">Credit / Debit Card</div>
+      </div>
+      <div class="payment-check"></div>
+    </div>
+  </label>
+
+  <label class="payment-option">
+    <input type="radio" name="payment">
+    <div class="payment-card">
+      <div class="payment-left">
+        <div class="payment-icon">
+          <i class="fa-solid fa-money-bill-wave"></i>
+        </div>
+        <div class="payment-title">Cash on Delivery</div>
+      </div>
+      <div class="payment-check"></div>
+    </div>
+  </label>
+
+</div>
+
+
   </div>
-  <div class="form-group">
-    <label data-i18n="lastName">Last Name *</label>
-    <input type="text" required>
+
+  <div class="checkout-right">
+    <h2>Your Order</h2>
+
+    <div id="orderItems"></div>
+
+    <div class="summary-total">
+      Total: $<span id="totalPrice">0</span>
+    </div>
+    <button class="place-order">Place Order</button>
   </div>
-</div>
-
-<div class="form-group">
-  <label>Email *</label>
-  <input type="email" required>
-</div>
-
-<div class="form-group">
-  <label data-i18n="phone">Phone *</label>
-  <input type="tel" required>
-</div>
-
-<h2 data-i18n="shipping">Shipping Address</h2>
-
-<div class="form-group">
-  <label data-i18n="country">Country *</label>
-  <input type="text" required>
-</div>
-
-<div class="form-group">
-  <label data-i18n="city">City *</label>
-  <input type="text" required>
-</div>
-
-<div class="form-group">
-  <label data-i18n="address">Street Address *</label>
-  <input type="text" required>
-</div>
-
-<div class="form-row">
-  <div class="form-group">
-    <label data-i18n="postal">Postal Code *</label>
-    <input type="text" required>
-  </div>
-  <div class="form-group">
-    <label data-i18n="state">Region / State *</label>
-    <input type="text" required>
-  </div>
-</div>
-
-<h2 data-i18n="payment">Payment Method</h2>
-
-<label class="payment-option">
-  <input type="radio" name="payment" required>
-  <i class="fa-solid fa-credit-card"></i> Card
-</label>
-
-<label class="payment-option">
-  <input type="radio" name="payment">
-  <i class="fa-brands fa-apple"></i> Apple Pay
-</label>
-
-<label class="payment-option">
-  <input type="radio" name="payment">
-  <i class="fa-brands fa-google-pay"></i> Google Pay
-</label>
-
-<label class="payment-option">
-  <input type="radio" name="payment">
-  <i class="fa-solid fa-money-bill-wave"></i> Cash
-</label>
-
-</form>
-</div>
-
-<div class="summary">
-<h2 data-i18n="orderSummary">Order Summary</h2>
-<div id="orderItems"></div>
-<div class="summary-total">
-<span>Total</span>
-<span id="orderTotal">$0</span>
-</div>
-<button class="pay-btn" onclick="submitOrder()" data-i18n="completeOrder">Complete Order</button>
-</div>
 
 </div>
 
 <script>
 
-/* ================= CART COUNT ================= */
-
-function updateCartCount(){
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
-  const count = cart.reduce((a,b)=>a+b.qty,0);
-  const el = document.getElementById("cartCount");
-  if(count>0){
-    el.style.display="block";
-    el.textContent=count;
-  } else {
-    el.style.display="none";
-  }
-}
-updateCartCount();
-
-/* ================= SUMMARY ================= */
-
-function renderSummary(){
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
-  const container = document.getElementById("orderItems");
-  const totalEl = document.getElementById("orderTotal");
-
-  let total = 0;
-  container.innerHTML="";
-
-  cart.forEach(item=>{
-    total+=item.price*item.qty;
-    container.innerHTML+=`
-      <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
-        <span>${item.name} x${item.qty}</span>
-        <span>$${item.price*item.qty}</span>
-      </div>
-    `;
-  });
-
-  totalEl.textContent="$"+total;
-}
-renderSummary();
-
-/* ================= ORDER ================= */
-
-function submitOrder(){
-  const form=document.getElementById("checkoutForm");
-  if(!form.checkValidity()){
-    alert("Fill all required fields");
-    return;
-  }
-  alert("Order placed (Demo Mode)");
-  localStorage.removeItem("cart");
-  location.href="index.html";
-}
-
-/* ================= LANGUAGE ================= */
-
-const translations={
-  en:{
-    home:"HOME",
-    learn:"LEARN",
-    product:"PRODUCT",
-    checkout:"Checkout",
-    firstName:"First Name *",
-    lastName:"Last Name *",
-    phone:"Phone *",
-    shipping:"Shipping Address",
-    country:"Country *",
-    city:"City *",
-    address:"Street Address *",
-    postal:"Postal Code *",
-    state:"Region / State *",
-    payment:"Payment Method",
-    orderSummary:"Order Summary",
-    completeOrder:"Complete Order"
-  },
-  ru:{
-    home:"ГЛАВНАЯ",
-    learn:"О ПРОДУКТЕ",
-    product:"ПРОДУКТ",
-    checkout:"Оформление",
-    firstName:"Имя *",
-    lastName:"Фамилия *",
-    phone:"Телефон *",
-    shipping:"Адрес доставки",
-    country:"Страна *",
-    city:"Город *",
-    address:"Адрес *",
-    postal:"Индекс *",
-    state:"Регион *",
-    payment:"Способ оплаты",
-    orderSummary:"Ваш заказ",
-    completeOrder:"Оформить заказ"
-  }
-};
-
-function toggleLang(){
-  const current=localStorage.getItem("lang")||"en";
-  const newLang=current==="en"?"ru":"en";
-  localStorage.setItem("lang",newLang);
-  applyLang();
-}
-
-function applyLang(){
-  const lang=localStorage.getItem("lang")||"en";
-  document.querySelector(".lang-wrapper").textContent=lang.toUpperCase();
-  document.querySelectorAll("[data-i18n]").forEach(el=>{
-    const key=el.getAttribute("data-i18n");
-    if(translations[lang][key]){
-      el.textContent=translations[lang][key];
+/* THEME */
+  function applyTheme(theme) {
+    if (theme === "dark") {
+      document.body.classList.add("dark");
+    } else {
+      document.body.classList.remove("dark");
     }
-  });
+  }
+
+  function toggleTheme() {
+    const isDark = document.body.classList.toggle("dark");
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+  }
+
+  // apply saved theme on load
+  (function () {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) applyTheme(savedTheme);
+  })();
+
+/* LANGUAGE */
+function toggleLangMenu(){
+  document.getElementById("langMenu").classList.toggle("active");
 }
 
-applyLang();
+function setLang(lang){
+  localStorage.setItem("language", lang);
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+  document.getElementById("LangBtn").textContent = lang.toUpperCase();
+  document.getElementById("langMenu").classList.remove("active");
+}
 
+(function(){
+  const savedLang = localStorage.getItem("language") || "en";
+  setLang(savedLang);
+})();
+
+/* CART BADGE */
+function updateCart(){
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const totalQty = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
+  const badge = document.getElementById("cartBadge");
+
+  if(totalQty > 0){
+    badge.textContent = totalQty;
+    badge.style.display = "flex";
+  } else {
+    badge.style.display = "none";
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function(){
+
+  function updateCartBadges(){
+
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const total = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
+
+    const badges = document.querySelectorAll(".cart-badge");
+
+    badges.forEach(function(badge){
+      if(total > 0){
+        badge.textContent = total;
+        badge.style.display = "flex";
+      } else {
+        badge.style.display = "none";
+      }
+    });
+  }
+
+  updateCartBadges();
+
+});
+
+
+updateCart();
+
+/* ORDER SUMMARY */
+const cart = JSON.parse(localStorage.getItem("cart")) || [];
+let total = 0;
+const orderContainer = document.getElementById("orderItems");
+
+cart.forEach(item => {
+  const div = document.createElement("div");
+  div.className = "summary-item";
+  div.innerHTML = `
+    <span>${item.name} x${item.qty || 1}</span>
+    <span>$${(item.price * (item.qty || 1)).toFixed(2)}</span>
+  `;
+  orderContainer.appendChild(div);
+  total += item.price * (item.qty || 1);
+});
+
+document.getElementById("totalPrice").textContent = total.toFixed(2);
+
+/* ================= MOBILE MENU ================= */
+
+function toggleMenu() {
+  const menu = document.getElementById("mobileMenu");
+  const overlay = document.getElementById("overlay");
+
+  menu.classList.toggle("active");
+  overlay.classList.toggle("active");
+}
+
+/* Переход на главную */
+function goHome() {
+  window.location.href = "index.html";
+}
 </script>
 
 </body>
 </html>
+
+
