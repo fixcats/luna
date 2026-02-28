@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" translate="no">
+<head>
+<meta name="google" content="notranslate">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>LUNAVEK — About Us</title>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Didot&display=swap" rel="stylesheet">
+
+<!-- Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+/* ================= RESET ================= */
+*{box-sizing:border-box;margin:0;padding:0}
+
+/* ================= THEME ================= */
+:root{
+--bg:#ffffff;
+--text:#111111;
+--muted:#666666;
+--card:#ffffff;
+--border:rgba(0,0,0,0.08);
+}
+
+body.dark{
+--bg:#1b1b1b;
+--text:#ffffff;
+--muted:#bbbbbb;
+--card:#222222;
+--border:rgba(255,255,255,0.12);
+}
+
+body{
+font-family:Inter,system-ui,sans-serif;
+background:var(--bg);
+color:var(--text);
+transition:.3s;
+min-height:100vh;
+}
+
+a{text-decoration:none;color:inherit}
+button{font-family:inherit}
+
+/* ================= HEADER (IDENTICAL) ================= */
+
+header{
+position:sticky;
+top:0;
+z-index:200;
+background:var(--bg);
+border-bottom:1px solid var(--border);
+}
+
+.header-inner{
+max-width:1800px;
+margin:auto;
+padding:16px 22px;
+display:grid;
+grid-template-columns:1fr auto 1fr;
+align-items:center;
+}
+
+/* LEFT NAV */
+.nav-left{
+display:flex;
+gap:34px;
+font-size:12px;
+font-weight:700;
+letter-spacing:.16em;
+text-transform:uppercase;
+}
+
+.nav-left a{
+opacity:.85;
+transition:.25s;
+position:relative;
+}
+
+.nav-left a:hover{opacity:1}
+
+.nav-left a::after{
+content:"";
+position:absolute;
+left:0;
+bottom:-6px;
+width:0;
+height:1px;
+background:var(--text);
+transition:.25s;
+}
+
+.nav-left a:hover::after{width:100%}
+
+/* LOGO */
+.logo{
+justify-self:center;
+text-align:center;
+cursor:pointer;
+line-height:1.1;
+}
+
+.logo-main{
+font-family:"Didot","Playfair Display",serif;
+font-size:28px;
+font-weight:500;
+letter-spacing:.32em;
+}
+
+/* HEADER ACTIONS */
+.header-actions{
+justify-self:end;
+display:flex;
+align-items:center;
+gap:18px;
+}
+
+.icon-btn{
+background:none;
+border:none;
+font-size:20px;
+color:var(--text);
+cursor:pointer;
+transition:.25s;
+display:flex;
+align-items:center;
+justify-content:center;
+position:relative;
+}
+
+.icon-btn:hover{opacity:.7}
+
+/* CART BADGE */
+.cart-badge{
+position:absolute;
+top:-6px;
+right:-8px;
+background:var(--text);
+color:var(--bg);
+font-size:10px;
+font-weight:700;
+padding:2px 6px;
+border-radius:999px;
+display:none;
+}
+
+/* LANGUAGE */
+.lang-wrapper{position:relative}
+
+.Lang-btn{
+background:none;
+border:none;
+font-size:12px;
+font-weight:700;
+letter-spacing:.12em;
+cursor:pointer;
+color:var(--text);
+}
+
+.lang-menu{
+position:absolute;
+right:0;
+top:130%;
+background:var(--bg);
+border:1px solid var(--border);
+border-radius:12px;
+box-shadow:0 12px 32px rgba(0,0,0,.2);
+padding:6px;
+display:none;
+flex-direction:column;
+min-width:150px;
+z-index:300;
+}
+
+.lang-menu.active{display:flex}
+
+.lang-menu button{
+background:none;
+border:none;
+padding:10px 12px;
+text-align:left;
+cursor:pointer;
+font-size:12px;
+font-weight:600;
+letter-spacing:.08em;
+color:var(--text);
+border-radius:8px;
+transition:.2s;
+}
+
+.lang-menu button:hover{
+background:rgba(0,0,0,.06);
+}
+
+body.dark .lang-menu button:hover{
+background:rgba(255,255,255,.08);
+}
+
+/* MOBILE */
+.menu-btn{display:none}
+
+.mobile-menu{
+position:fixed;
+top:0;
+left:-100%;
+width:300px;
+height:100vh;
+background:var(--bg);
+border-right:1px solid var(--border);
+padding:28px 24px;
+display:flex;
+flex-direction:column;
+gap:26px;
+transition:.35s ease;
+z-index:250;
+}
+
+.mobile-menu.active{left:0}
+
+.mobile-top{
+display:grid;
+grid-template-columns:auto 1fr auto;
+align-items:center;
+margin-bottom:24px;
+}
+
+.mobile-logo{
+text-align:center;
+font-family:"Didot",serif;
+font-size:22px;
+letter-spacing:.28em;
+cursor:pointer;
+}
+
+.mobile-menu a{
+font-size:12px;
+font-weight:700;
+letter-spacing:.22em;
+text-transform:uppercase;
+}
+
+.mobile-actions{
+margin-top:auto;
+display:flex;
+align-items:center;
+gap:16px;
+}
+
+.overlay{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.45);
+opacity:0;
+pointer-events:none;
+transition:.3s;
+z-index:220;
+}
+
+.overlay.active{
+opacity:1;
+pointer-events:all;
+}
+
+/* ================= ABOUT HERO (EDITORIAL LUXURY) ================= */
+
+.about-hero{
+position:relative;
+padding:200px 22px 160px;
+text-align:center;
+overflow:hidden;
+background:
+radial-gradient(circle at 15% 25%, rgba(255,255,255,0.06), transparent 60%),
+radial-gradient(circle at 85% 75%, rgba(255,255,255,0.05), transparent 60%),
+linear-gradient(180deg,#0c0c0c 0%, #1a1a1a 100%);
+}
+
+body:not(.dark) .about-hero{
+background:
+radial-gradient(circle at 15% 25%, rgba(0,0,0,0.04), transparent 60%),
+radial-gradient(circle at 85% 75%, rgba(0,0,0,0.03), transparent 60%),
+linear-gradient(180deg,#ffffff 0%, #f3f3f3 100%);
+}
+
+.about-hero::before{
+content:"";
+position:absolute;
+width:700px;
+height:700px;
+background:radial-gradient(circle, rgba(255,255,255,0.08), transparent 70%);
+top:-250px;
+left:50%;
+transform:translateX(-50%);
+filter:blur(120px);
+pointer-events:none;
+}
+
+.about-hero-inner{
+max-width:1050px;
+margin:auto;
+position:relative;
+z-index:2;
+}
+
+.about-hero-sub{
+font-size:11px;
+letter-spacing:.4em;
+text-transform:uppercase;
+color:var(--muted);
+margin-bottom:30px;
+}
+
+.about-hero h1{
+font-family:"Didot","Playfair Display",serif;
+font-size:clamp(44px,6vw,84px);
+font-weight:500;
+letter-spacing:.08em;
+line-height:1.05;
+margin-bottom:40px;
+}
+
+.about-hero p{
+max-width:760px;
+margin:0 auto;
+color:var(--muted);
+font-size:19px;
+line-height:1.9;
+}
+
+.hero-divider{
+width:70px;
+height:1px;
+background:var(--text);
+margin:50px auto 0;
+opacity:.35;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:820px){
+
+.nav-left{display:none}
+.menu-btn{display:inline-flex}
+
+.logo{
+position:absolute;
+left:50%;
+transform:translateX(-50%);
+}
+
+.logo-main{font-size:22px}
+
+.header-inner{
+grid-template-columns:auto 1fr auto;
+padding:22px;
+}
+
+.theme-btn{display:none}
+
+.about-block{
+padding:30px 22px;
+font-size:15px;
+}
+
+.highlight{
+padding:40px 22px;
+font-size:16px;
+}
+
+}
+
+/* ================= RTL ================= */
+
+html[dir="rtl"]{direction:rtl}
+
+html[dir="rtl"] .lang-menu{
+right:auto;
+left:0;
+}
+
+html[dir="rtl"] .mobile-menu{
+left:auto;
+right:-100%;
+border-right:none;
+border-left:1px solid var(--border);
+}
+
+html[dir="rtl"] .mobile-menu.active{
+right:0;
+}
+
+/* ================= MOBILE FULL OPTIMIZATION ================= */
+
+@media (max-width: 820px){
+
+/* HERO */
+.about-hero{
+padding:140px 22px 100px;
+}
+
+.about-hero h1{
+font-size:32px;
+letter-spacing:.04em;
+line-height:1.2;
+margin-bottom:24px;
+}
+
+.about-hero p{
+font-size:16px;
+line-height:1.8;
+}
+
+.hero-divider{
+margin:35px auto 0;
+}
+
+/* WRAPPER */
+.about-wrapper{
+margin:80px auto !important;
+}
+
+/* GRID SECTIONS → 1 COLUMN */
+.about-wrapper > div{
+display:flex !important;
+flex-direction:column;
+gap:40px !important;
+margin-bottom:90px !important;
+}
+
+/* REMOVE ORDER FLIP */
+.about-wrapper > div > div{
+order:unset !important;
+}
+
+/* SECTION TITLES */
+.about-wrapper h2{
+font-size:28px !important;
+margin-bottom:24px !important;
+text-align:left;
+}
+
+.about-wrapper p{
+font-size:15px !important;
+line-height:1.8 !important;
+}
+
+/* PHILOSOPHY BOX */
+.about-wrapper > div > div[style*="linear-gradient"]{
+padding:40px 24px !important;
+border-radius:18px !important;
+}
+
+/* PRODUCT HIGHLIGHT CARD */
+.about-wrapper > div > div[style*="var(--card)"]{
+padding:50px 28px !important;
+border-radius:22px !important;
+}
+
+.about-wrapper h3{
+font-size:22px !important;
+margin-bottom:14px !important;
+}
+
+/* FEATURES */
+.about-wrapper i{
+font-size:14px;
+}
+
+.about-wrapper span{
+font-size:14px;
+}
+
+/* VALUES SECTION */
+.about-wrapper > div[style*="text-align:center"] > div{
+grid-template-columns:1fr !important;
+gap:40px !important;
+}
+
+.about-wrapper h4{
+font-size:12px !important;
+letter-spacing:.22em !important;
+}
+
+.about-wrapper > div[style*="text-align:center"]{
+margin-bottom:90px !important;
+}
+
+/* FINAL TEXT */
+.about-wrapper > div:last-child{
+margin-bottom:100px !important;
+}
+
+.about-wrapper > div:last-child p{
+font-size:17px !important;
+line-height:1.9 !important;
+padding:0 10px;
+}
+
+}
+
+    /* ================= MOBILE LANGUAGE FIX ================= */
+
+@media(max-width:820px){
+
+  .lang-menu{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 85%;
+    max-width: 320px;
+    border-radius: 18px;
+    padding: 18px;
+    gap: 10px;
+    box-shadow: 0 25px 60px rgba(0,0,0,.35);
+  }
+
+  .lang-menu button{
+    padding: 14px;
+    font-size: 14px;
+    text-align: center;
+    border-radius: 12px;
+    background: var(--card);
+  }
+
+}
+
+/* ================= MOBILE CENTER ALIGN ================= */
+
+@media (max-width: 820px){
+
+/* HERO */
+.about-hero{
+text-align:center;
+}
+
+.about-hero h1{
+text-align:center;
+}
+
+.about-hero p{
+text-align:center;
+margin-left:auto;
+margin-right:auto;
+}
+
+/* ALL SECTIONS */
+.about-wrapper{
+text-align:center;
+}
+
+/* FORCE ALL TEXT CENTER */
+.about-wrapper h2,
+.about-wrapper h3,
+.about-wrapper h4,
+.about-wrapper p,
+.about-wrapper span,
+.about-wrapper i{
+text-align:center !important;
+}
+
+/* GRID SECTIONS → CENTER CONTENT */
+.about-wrapper > div{
+align-items:center !important;
+}
+
+/* CARDS */
+.about-wrapper > div > div{
+text-align:center !important;
+}
+
+/* VALUES GRID */
+.about-wrapper > div[style*="text-align:center"] > div{
+justify-items:center !important;
+}
+
+/* FINAL PARAGRAPH */
+.about-wrapper > div:last-child p{
+margin-left:auto;
+margin-right:auto;
+}
+
+}
+/* ===== MOBILE FIX – FEATURES PERFECT CENTER ===== */
+
+@media (max-width:820px){
+
+/* контейнер фич */
+.about-wrapper > div > div > div{
+justify-content:center !important;
+text-align:center !important;
+width:100%;
+}
+
+/* иконка + текст */
+.about-wrapper > div > div > div i{
+margin:0 !important;
+}
+
+.about-wrapper > div > div > div span{
+text-align:center !important;
+display:block;
+}
+
+}
+
+
+
+</style>
+</head>
+<body class="dark">
+
+<!-- ================= HEADER ================= -->
+
+<header>
+<div class="header-inner">
+
+<button class="icon-btn menu-btn" onclick="toggleMenu()">
+<i class="fa-solid fa-bars"></i>
+</button>
+
+<nav class="nav-left">
+<a href="about.html" data-i18n="about">About Us</a>
+<a href="learn.html" data-i18n="learn">Learn</a>
+<a href="product.html" data-i18n="product">Product</a>
+</nav>
+
+<div class="logo" onclick="goHome()">
+<span class="logo-main">LUNAVEK</span>
+</div>
+
+<div class="header-actions">
+
+<div class="lang-wrapper">
+<button class="Lang-btn" onclick="toggleLangMenu()" id="LangBtn">EN</button>
+<div class="lang-menu" id="langMenu">
+<button onclick="setLang('en')">EN English</button>
+<button onclick="setLang('fr')">FR Français</button>
+<button onclick="setLang('ar')">AR العربية</button>
+</div>
+</div>
+
+<button class="icon-btn">
+<a href="cart.html" class="icon-btn">
+<i class="fa-solid fa-bag-shopping"></i>
+<span class="cart-badge" id="cartBadge">0</span>
+</a>
+</button>
+
+<button class="icon-btn theme-btn" onclick="toggleTheme()">
+<i class="fa-solid fa-moon"></i>
+</button>
+
+</div>
+</div>
+</header>
+
+<!-- MOBILE -->
+<div class="mobile-menu" id="mobileMenu">
+<div class="mobile-top">
+<button class="icon-btn" onclick="toggleMenu()"><i class="fa-solid fa-xmark"></i></button>
+<div class="mobile-logo" onclick="goHome()">LUNAVEK</div>
+<button class="icon-btn"><i class="fa-solid fa-bag-shopping"></i>
+<span class="cart-badge" id="cartBadgeMobile">0</span></button>
+</div>
+
+<a href="about.html" data-i18n="about">About Us</a>
+<a href="learn.html" data-i18n="learn">Learn</a>
+<a href="product.html" data-i18n="product">Product</a>
+
+<div class="mobile-actions">
+<div class="lang-wrapper">
+<button class="Lang-btn" onclick="toggleLangMenuMobile()" id="LangBtnMobile">EN</button>
+<div class="lang-menu" id="langMenuMobile">
+<button onclick="setLang('en')">EN English</button>
+<button onclick="setLang('fr')">FR Français</button>
+<button onclick="setLang('ar')">AR العربية</button>
+</div>
+</div>
+
+<button class="icon-btn" onclick="toggleTheme()"><i class="fa-solid fa-moon"></i></button>
+</div>
+</div>
+
+<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+<!-- ================= ABOUT CONTENT ================= -->
+
+<section class="about-hero">
+<div class="about-hero-inner">
+
+<div class="about-hero-sub" data-i18n="hero_sub">Clinical Beauty Reimagined</div>
+
+<h1 data-i18n="hero_title">
+Elevating At-Home Skincare<br>
+To A Professional Standard
+</h1>
+
+<p data-i18n="intro">
+At LunaVek, we merge medical-grade light therapy with refined design to create intelligent beauty rituals for the modern woman.
+</p>
+
+<div class="hero-divider"></div>
+
+</div>
+</section>
+
+
+<section class="about-wrapper" style="max-width:1200px;margin:120px auto;padding:0 22px;">
+
+<!-- MISSION SECTION -->
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:100px;margin-bottom:140px;align-items:center;">
+
+<div>
+<h2 style="font-family:'Didot',serif;font-size:48px;font-weight:500;letter-spacing:.06em;margin-bottom:40px;" data-i18n="mission_title">
+Redefining Beauty Technology
+</h2>
+
+<p style="color:var(--muted);font-size:18px;line-height:1.9;margin-bottom:30px;" data-i18n="p1">
+Our mission is to transform professional skincare into an effortless at-home experience — combining advanced technology, timeless aesthetics, and visible performance.
+</p>
+
+<p style="color:var(--muted);font-size:18px;line-height:1.9;" data-i18n="mission_text2">
+We believe luxury should be intelligent. Every device we create is engineered to deliver results while maintaining elegance, safety, and simplicity.
+</p>
+</div>
+
+<div style="background:linear-gradient(180deg,rgba(255,255,255,0.05),transparent);padding:60px;border:1px solid var(--border);border-radius:24px;">
+<h3 style="font-size:13px;letter-spacing:.35em;text-transform:uppercase;color:var(--muted);margin-bottom:30px;" data-i18n="philosophy_title">
+Our Philosophy
+</h3>
+
+<p style="font-size:20px;line-height:1.8;" data-i18n="philosophy_text">
+Skincare is no longer a routine.<br>
+It is a <strong>precision ritual</strong>.
+</p>
+</div>
+
+</div>
+
+
+<!-- PRODUCT SECTION -->
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:100px;margin-bottom:140px;align-items:center;">
+
+<div style="order:2;">
+<h2 style="font-family:'Didot',serif;font-size:48px;font-weight:500;letter-spacing:.06em;margin-bottom:40px;" data-i18n="product_title">
+Advanced LED Light Science
+</h2>
+
+<p style="color:var(--muted);font-size:18px;line-height:1.9;margin-bottom:40px;" data-i18n="p2">
+Our LED Facial Mask utilizes clinically researched light wavelengths to support collagen production, reduce inflammation, improve skin tone, and restore radiance — safely and comfortably.
+</p>
+
+<div style="display:grid;gap:18px;">
+<div style="display:flex;gap:14px;align-items:center;"><i class="fa-solid fa-check"></i><span data-i18n="f1">Clinically inspired light technology</span></div>
+<div style="display:flex;gap:14px;align-items:center;"><i class="fa-solid fa-check"></i><span data-i18n="f2">Controlled, skin-safe energy levels</span></div>
+<div style="display:flex;gap:14px;align-items:center;"><i class="fa-solid fa-check"></i><span data-i18n="f3">Premium-grade materials</span></div>
+<div style="display:flex;gap:14px;align-items:center;"><i class="fa-solid fa-check"></i><span data-i18n="f4">Ergonomic, treatment-focused design</span></div>
+</div>
+
+</div>
+
+<div style="background:var(--card);border:1px solid var(--border);border-radius:30px;padding:80px 60px;text-align:center;">
+<h3 style="font-family:'Didot',serif;font-size:36px;font-weight:500;margin-bottom:20px;" data-i18n="product_highlight_title">
+Precision. Comfort. Performance.
+</h3>
+<p style="color:var(--muted);font-size:17px;line-height:1.8;" data-i18n="product_highlight_text">
+Engineered for daily use.<br>
+Designed for visible transformation.
+</p>
+</div>
+
+</div>
+
+
+<!-- VALUES SECTION -->
+
+<div style="text-align:center;margin-bottom:140px;">
+
+<h2 style="font-family:'Didot',serif;font-size:52px;font-weight:500;margin-bottom:60px;" data-i18n="values_title">
+The LunaVek Standard
+</h2>
+
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:60px;">
+
+<div>
+<h4 style="font-size:13px;letter-spacing:.3em;text-transform:uppercase;margin-bottom:20px;" data-i18n="value1_title">Innovation</h4>
+<p style="color:var(--muted);line-height:1.8;" data-i18n="value1_text">
+Medical research meets modern engineering to deliver measurable skin improvement.
+</p>
+</div>
+
+<div>
+<h4 style="font-size:13px;letter-spacing:.3em;text-transform:uppercase;margin-bottom:20px;" data-i18n="value2_title">Elegance</h4>
+<p style="color:var(--muted);line-height:1.8;" data-i18n="value2_text">
+Refined aesthetics crafted to complement your lifestyle and personal space.
+</p>
+</div>
+
+<div>
+<h4 style="font-size:13px;letter-spacing:.3em;text-transform:uppercase;margin-bottom:20px;" data-i18n="value3_title">Integrity</h4>
+<p style="color:var(--muted);line-height:1.8;" data-i18n="value3_text">
+Safe, tested, and thoughtfully designed for all skin types.
+</p>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- FINAL STATEMENT -->
+
+<div style="max-width:900px;margin:0 auto 160px;text-align:center;">
+<p style="font-size:22px;line-height:1.9;font-weight:400;" data-i18n="final">
+We empower confidence through intelligent beauty solutions — because skincare is not simply a habit, it is a refined ritual. LunaVek represents a new era of at-home skincare — where medical innovation meets timeless elegance.
+</p>
+</div>
+
+</section>
+
+<script>
+
+/* THEME */
+function applyTheme(theme){
+if(theme==="dark"){document.body.classList.add("dark")}
+else{document.body.classList.remove("dark")}
+}
+
+function toggleTheme(){
+const isDark=document.body.classList.toggle("dark");
+localStorage.setItem("theme",isDark?"dark":"light");
+}
+
+(function(){
+const savedTheme=localStorage.getItem("theme");
+if(savedTheme)applyTheme(savedTheme);
+})();
+
+/* MENU */
+const menu=document.getElementById('mobileMenu');
+const overlay=document.getElementById('overlay');
+function toggleMenu(){
+menu.classList.toggle('active');
+overlay.classList.toggle('active');
+}
+
+/* HOME */
+function goHome(){
+window.location.href="index.html";
+}
+
+/* CART BADGE */
+function updateCartBadge(){
+const cart=JSON.parse(localStorage.getItem("cart"))||[];
+const total=cart.reduce((sum,item)=>sum+(item.qty||1),0);
+document.querySelectorAll(".cart-badge").forEach(b=>{
+if(total>0){b.textContent=total;b.style.display="flex"}
+else{b.style.display="none"}
+});
+}
+updateCartBadge();
+
+/* LANGUAGE */
+const translations = {
+en:{
+
+title:"About LunaVek",
+
+hero_sub:"Clinical Beauty Reimagined",
+hero_title:"Elevating At-Home Skincare To A Professional Standard",
+
+intro:"At LunaVek, we merge medical-grade light therapy with refined design to create intelligent beauty rituals for the modern woman.",
+
+mission_title:"Redefining Beauty Technology",
+p1:"Our mission is to transform professional skincare into an effortless at-home experience — combining advanced technology, timeless aesthetics, and visible performance.",
+mission_text2:"We believe luxury should be intelligent. Every device we create is engineered to deliver results while maintaining elegance, safety, and simplicity.",
+
+philosophy_title:"Our Philosophy",
+philosophy_text:"Skincare is no longer a routine. It is a precision ritual.",
+
+product_title:"Advanced LED Light Science",
+p2:"Our LED Facial Mask utilizes clinically researched light wavelengths to support collagen production, reduce inflammation, improve skin tone, and restore radiance — safely and comfortably.",
+
+product_highlight_title:"Precision. Comfort. Performance.",
+product_highlight_text:"Engineered for daily use. Designed for visible transformation.",
+
+values_title:"The LunaVek Standard",
+
+value1_title:"Innovation",
+value1_text:"Medical research meets modern engineering to deliver measurable skin improvement.",
+
+value2_title:"Elegance",
+value2_text:"Refined aesthetics crafted to complement your lifestyle and personal space.",
+
+value3_title:"Integrity",
+value3_text:"Safe, tested, and thoughtfully designed for all skin types.",
+
+f1:"Clinically inspired light technology",
+f2:"Controlled, skin-safe energy levels",
+f3:"Premium-grade materials",
+f4:"Ergonomic, treatment-focused design",
+
+final:"We empower confidence through intelligent beauty solutions — because skincare is not simply a habit, it is a refined ritual. LunaVek represents a new era of at-home skincare — where medical innovation meets timeless elegance.",
+
+about:"About Us",
+learn:"Learn",
+product:"Product"
+},
+
+fr:{
+
+title:"À propos de LunaVek",
+
+hero_sub:"Beauté clinique réinventée",
+hero_title:"Élever les soins à domicile à un niveau professionnel",
+
+intro:"Chez LunaVek, nous combinons la luminothérapie de niveau médical avec un design raffiné pour créer des rituels de beauté intelligents.",
+
+mission_title:"Redéfinir la technologie beauté",
+p1:"Notre mission est de transformer les soins professionnels en une expérience à domicile simple et performante.",
+mission_text2:"Nous pensons que le luxe doit être intelligent. Chaque appareil est conçu pour offrir des résultats visibles avec élégance et sécurité.",
+
+philosophy_title:"Notre philosophie",
+philosophy_text:"Les soins ne sont plus une routine. C’est un rituel de précision.",
+
+product_title:"Science avancée de la lumière LED",
+p2:"Notre masque LED utilise des longueurs d’onde cliniquement étudiées pour stimuler le collagène et améliorer l’éclat de la peau.",
+
+product_highlight_title:"Précision. Confort. Performance.",
+product_highlight_text:"Conçu pour un usage quotidien. Pensé pour une transformation visible.",
+
+values_title:"Le standard LunaVek",
+
+value1_title:"Innovation",
+value1_text:"La recherche médicale rencontre l’ingénierie moderne.",
+
+value2_title:"Élégance",
+value2_text:"Un design raffiné adapté à votre style de vie.",
+
+value3_title:"Intégrité",
+value3_text:"Sécurité et qualité pour tous les types de peau.",
+
+f1:"Technologie lumineuse inspirée cliniquement",
+f2:"Niveaux d’énergie contrôlés et sûrs",
+f3:"Matériaux premium",
+f4:"Design ergonomique",
+
+final:"LunaVek représente une nouvelle ère des soins à domicile — où l’innovation médicale rencontre l’élégance intemporelle.",
+
+about:"À propos",
+learn:"Découvrir",
+product:"Produit"
+},
+
+ar:{
+
+title:"عن LunaVek",
+
+hero_sub:"إعادة تعريف الجمال السريري",
+hero_title:"الارتقاء بالعناية المنزلية إلى مستوى احترافي",
+
+intro:"في LunaVek ندمج العلاج الضوئي الطبي مع تصميم راقٍ لابتكار طقوس عناية ذكية.",
+
+mission_title:"إعادة تعريف تكنولوجيا الجمال",
+p1:"مهمتنا تحويل العناية الاحترافية إلى تجربة منزلية سهلة وفعالة.",
+mission_text2:"نؤمن أن الفخامة يجب أن تكون ذكية. كل جهاز نصممه يجمع بين النتائج والأناقة والأمان.",
+
+philosophy_title:"فلسفتنا",
+philosophy_text:"لم تعد العناية بالبشرة روتينًا. بل أصبحت طقسًا دقيقًا.",
+
+product_title:"تقنية LED المتقدمة",
+p2:"يستخدم قناع LED أطوالًا موجية مدروسة سريريًا لدعم إنتاج الكولاجين وتحسين إشراقة البشرة.",
+
+product_highlight_title:"الدقة. الراحة. الأداء.",
+product_highlight_text:"مصمم للاستخدام اليومي. لتحقيق تحول مرئي.",
+
+values_title:"معيار LunaVek",
+
+value1_title:"الابتكار",
+value1_text:"التقاء البحث الطبي بالهندسة الحديثة.",
+
+value2_title:"الأناقة",
+value2_text:"تصميم راقٍ يناسب أسلوب حياتك.",
+
+value3_title:"النزاهة",
+value3_text:"آمن ومدروس لجميع أنواع البشرة.",
+
+f1:"تقنية ضوئية مستوحاة سريريًا",
+f2:"مستويات طاقة آمنة",
+f3:"مواد عالية الجودة",
+f4:"تصميم مريح",
+
+final:"تمثل LunaVek عصرًا جديدًا في العناية المنزلية — حيث يلتقي الابتكار الطبي بالأناقة الخالدة.",
+
+about:"من نحن",
+learn:"تعرف أكثر",
+product:"المنتج"
+}
+};
+
+function applyTranslations(lang){
+if(!translations[lang])lang="en";
+localStorage.setItem("language",lang);
+document.documentElement.lang=lang;
+document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+document.getElementById("LangBtn").textContent=lang.toUpperCase();
+document.getElementById("LangBtnMobile").textContent=lang.toUpperCase();
+document.querySelectorAll("[data-i18n]").forEach(el=>{
+const key=el.getAttribute("data-i18n");
+if(translations[lang][key])el.textContent=translations[lang][key];
+});
+}
+
+function setLang(lang){
+applyTranslations(lang);
+document.getElementById("langMenu").classList.remove("active");
+document.getElementById("langMenuMobile").classList.remove("active");
+}
+
+function toggleLangMenu(){document.getElementById("langMenu").classList.toggle("active")}
+function toggleLangMenuMobile(){document.getElementById("langMenuMobile").classList.toggle("active")}
+
+document.addEventListener("DOMContentLoaded",()=>{
+let savedLang=localStorage.getItem("language");
+if(!savedLang||!translations[savedLang])savedLang="en";
+applyTranslations(savedLang);
+});
+
+</script>
+
+</body>
+</html>
