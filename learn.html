@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en" dir="ltr" translate="no">
 <head>
+  <meta name="google" content="notranslate">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LUNAVEK — Learn More</title>
@@ -431,6 +432,49 @@
       text-align: center;
     }
 
+    /* ================= BENEFITS ================= */
+.benefits-section {
+  text-align: center;
+}
+
+.benefits-section h2 {
+  font-size: clamp(22px, 3vw, 32px);
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  margin-bottom: 50px;
+}
+
+.benefits-grid {
+  max-width: 900px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.benefit-item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 24px 22px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--muted);
+  box-shadow: 0 20px 45px rgba(0,0,0,.12);
+}
+
+/* mobile */
+@media (max-width: 820px) {
+  .benefits-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .benefit-item {
+    padding: 18px 16px;
+    font-size: 13px;
+  }
+}
     /* ================= RESPONSIVE ================= */
     @media (max-width: 1024px) {
       .feature-grid { grid-template-columns: 1fr 1fr; }
@@ -503,6 +547,33 @@
       }
     }
 
+    /* ================= MOBILE LANGUAGE FIX ================= */
+
+@media(max-width:820px){
+
+  .lang-menu{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 85%;
+    max-width: 320px;
+    border-radius: 18px;
+    padding: 18px;
+    gap: 10px;
+    box-shadow: 0 25px 60px rgba(0,0,0,.35);
+  }
+
+  .lang-menu button{
+    padding: 14px;
+    font-size: 14px;
+    text-align: center;
+    border-radius: 12px;
+    background: var(--card);
+  }
+
+}
+
     /* ================= RTL ================= */
     html[dir="rtl"] { direction: rtl; }
 
@@ -523,7 +594,7 @@
     }
   </style>
 </head>
-<body>
+<body translate="no">
 
 <!-- ================= HEADER ================= -->
 <header>
@@ -534,9 +605,9 @@
     </button>
 
     <nav class="nav-left">
-      <a href="index.html" data-i18n="about">About Us</a>
+      <a href="aboutus.html" data-i18n="about">About Us</a>
       <a href="learn.html" data-i18n="learn">Learn</a>
-      <a href="product.html">Product</a>
+      <a href="product.html" data-i18n="product">Product</a>
     </nav>
 
     <div class="logo" onclick="goHome()">
@@ -576,9 +647,9 @@
     <span class="cart-badge" id="cartBadge">0</span></button>
   </div>
 
-  <a href="index.html" data-i18n="about">About Us</a>
+  <a href="aboutus.html" data-i18n="about">About Us</a>
   <a href="learn.html" data-i18n="learn">Learn</a>
-  <a href="product.html">Product</a>
+  <a href="product.html" data-i18n="product">Product</a>
 
   <div class="mobile-actions">
     <div class="lang-wrapper">
@@ -604,7 +675,7 @@
   <section class="section-head">
     <h1 data-i18n="learnTitle">Learn More</h1>
     <p data-i18n="learnIntro">
-      Thoughtfully designed for comfort, precision, and daily skincare rituals — LUNAVEK combines advanced LED technology with refined design to elevate your at-home routine.
+      Thoughtfully designed for comfort, precision, and daily skincare rituals - LUNAVEK combines advanced LED technology with refined design to elevate your at-home routine.
     </p>
   </section>
 
@@ -613,7 +684,7 @@
     <div class="feature-card">
       <h3 data-i18n="f1title">Thoughtfully Designed for Skin Comfort</h3>
       <p data-i18n="f1text">
-        The Luna Vek LED Beauty Mask is created using supple, food-grade silicone to ensure a smooth, comfortable fit suitable for consistent cosmetic use. Produced in accordance with globally recognized quality and safety frameworks including MDSAP, ISO 13485, FDA, CE, FCC, and RoHS.
+        The Luna Vek LED Beauty Mask is created using supple, food-grade silicone to ensure a smooth, comfortable fit suitable for consistent cosmetic use. Produced in accordance with globally recognized quality and safety frameworks including MDSAP, ISO 13485, FDA, IEC, FC, SAA, and RoHS.
       </p>
     </div>
 
@@ -697,6 +768,32 @@
     </div>
   </section>
 
+   <!-- COSMETIC BENEFITS -->
+  <section class="benefits-section">
+    <h2 data-i18n="benefitsTitle">Cosmetic Benefits You Can See</h2>
+
+    <div class="benefits-grid">
+      <div class="benefit-item" data-i18n="b1">
+        Encourages a fresh, luminous appearance
+      </div>
+
+      <div class="benefit-item" data-i18n="b2">
+        Helps enhance the look of skin smoothness and elasticity
+      </div>
+
+      <div class="benefit-item" data-i18n="b3">
+        Supports a more balanced and even-looking tone
+      </div>
+
+      <div class="benefit-item" data-i18n="b4">
+        Assists in improving the appearance of blemish-prone skin
+      </div>
+
+      <div class="benefit-item" data-i18n="b5">
+        Helps soften the visible look of fine lines
+      </div>
+    </div>
+  </section>
   <!-- DISCLAIMER -->
   <p class="disclaimer" data-i18n="disclaimer">
     *For cosmetic use only. Individual results may vary. This product is not intended to diagnose, treat, cure, or prevent any disease.
@@ -738,10 +835,11 @@ function goHome() {
 /* ================= LANGUAGE SYSTEM (REAL) ================= */
 const translations = {
   en: {
+    product: "Product",
     about: "About Us",
     learn: "Learn",
     learnTitle: "Learn More",
-    learnIntro: "Thoughtfully designed for comfort, precision, and daily skincare rituals — LUNAVEK combines advanced LED technology with refined design to elevate your at-home routine.",
+    learnIntro: "Thoughtfully designed for comfort, precision, and daily skincare rituals - LUNAVEK combines advanced LED technology with refined design to elevate your at-home routine.",
 
     f1title: "Thoughtfully Designed for Skin Comfort",
     f1text: "The Luna Vek LED Beauty Mask is created using supple, food-grade silicone to ensure a smooth, comfortable fit suitable for consistent cosmetic use. Produced in accordance with globally recognized quality and safety frameworks including MDSAP, ISO 13485, FDA, CE, FCC, and RoHS.",
@@ -785,50 +883,60 @@ const translations = {
     l3num: "100%",
     l3text: "High Mode<br>Anti-Wrinkle & Firming",
 
-    disclaimer: "*For cosmetic use only. Individual results may vary. This product is not intended to diagnose, treat, cure, or prevent any disease."
+    disclaimer: "*For cosmetic use only. Individual results may vary. This product is not intended to diagnose, treat, cure, or prevent any disease.",
+
+    benefitsTitle: "Cosmetic Benefits You Can See",
+
+    b1: "Encourages a fresh, luminous appearance",
+    b2: "Helps enhance the look of skin smoothness and elasticity",
+    b3: "Supports a more balanced and even-looking tone",
+    b4: "Assists in improving the appearance of blemish-prone skin",
+    b5: "Helps soften the visible look of fine lines",
   },
 
   fr: {
+    product: "produit",
     about: "À propos",
     learn: "Découvrir",
+
     learnTitle: "En savoir plus",
-    learnIntro: "Conçu avec soin pour le confort, la précision et les rituels quotidiens — LUNAVEK associe une technologie LED avancée à un design raffiné pour sublimer votre routine beauté.",
+    learnIntro: "Conçu avec soin pour le confort, la précision et les rituels quotidiens de soin — LUNAVEK associe une technologie LED avancée à un design raffiné afin de sublimer votre routine beauté à domicile.",
 
-    f1title: "Conçu pour le confort de la peau",
-    f1text: "Le masque LED Luna Vek est fabriqué en silicone souple de qualité alimentaire pour garantir un ajustement confortable adapté à un usage cosmétique régulier. Conforme aux normes internationales MDSAP, ISO 13485, FDA, CE, FCC et RoHS.",
+    f1title: "Conçu avec soin pour le confort de la peau",
+    f1text: "Le masque LED Luna Vek est fabriqué à partir d’un silicone souple de qualité alimentaire afin d’assurer un ajustement lisse et confortable, adapté à un usage cosmétique régulier. Produit conformément à des cadres internationaux reconnus en matière de qualité et de sécurité, notamment MDSAP, ISO 13485, FDA, CE, FCC et RoHS.",
 
-    f2title: "Un rituel lumineux quotidien",
-    f2text: "Dix minutes par séance offrent une expérience élégante à domicile qui complète votre routine de soins et favorise une peau visiblement éclatante.",
+    f2title: "Un rituel lumineux quotidien en toute simplicité",
+    f2text: "Dix minutes par séance suffisent pour offrir une expérience sophistiquée à domicile, complétant votre routine de soins et favorisant un teint naturellement éclatant.",
 
-    f3title: "Technologie LED 4 couleurs de précision",
-    f3text: "Le masque intègre 122 LED haute performance positionnées avec précision pour une diffusion lumineuse douce et équilibrée sur l’ensemble du visage.",
+    f3title: "Technologie LED 4 couleurs de haute précision",
+    f3text: "Le masque intègre 122 LED haute performance soigneusement positionnées afin d’assurer une diffusion lumineuse équilibrée et délicate sur l’ensemble du visage pour une application cosmétique raffinée.",
 
-    modesTitle: "Soin du visage personnalisé",
-    modesIntro: "6 modes de soin, trois niveaux de luminosité réglables et une lumière pulsée à 10 Hz pour soutenir votre routine cosmétique.",
+    modesTitle: "Un soin du visage personnalisé pour vous",
+    modesIntro: "6 modes de soin, trois niveaux de luminosité réglables et une lumière pulsée à 10 Hz conçus pour accompagner des routines cosmétiques avancées.",
 
     m1title: "Mode Régénération (660nm)",
     m1text: "Favorise la synthèse du collagène, raffermit la peau et améliore son élasticité.",
 
     m2title: "Mode Éclat (590nm + 660nm)",
-    m2text: "Illumine le teint et aide à réduire les pigments.",
+    m2text: "Illumine le teint et aide à réduire l’apparence des pigmentations.",
 
     m3title: "Mode Anti-Âge (660nm + 850nm)",
-    m3text: "Stimule la circulation sanguine et améliore la vitalité de la peau.",
+    m3text: "Stimule la circulation, améliore le flux sanguin et soutient la vitalité de la peau.",
 
     m4title: "Mode Réparation Profonde (590nm + 660nm + 850nm)",
-    m4text: "Accélère le métabolisme et améliore la texture et la pigmentation de la peau.",
+    m4text: "Accélère le métabolisme cutané et améliore l’apparence du teint et des pigmentations.",
 
     m5title: "Mode Acné (415nm)",
-    m5text: "Cible les bactéries responsables de l’acné et réduit l’inflammation et les marques.",
+    m5text: "Cible les bactéries responsables de l’acné et aide à réduire l’inflammation et les marques.",
 
-    m6title: "Mode Nuit (Toutes LEDs)",
-    m6text: "Favorise le collagène, réduit les rides, aide à la relaxation et améliore le sommeil.",
+    m6title: "Mode Soin du Soir (Toutes LED)",
+    m6text: "Soutient le collagène, réduit l’apparence des rides et favorise la relaxation et la qualité du sommeil.",
 
-    levelsTitle: "Trois niveaux d’intensité",
-    levelsIntro: "Réglés selon vos envies.",
+    levelsTitle: "Trois niveaux d’intensité lumineuse",
+    levelsIntro: "Ajustés selon vos préférences.",
 
     l1num: "50%",
-    l1text: "Mode Faible Lumière<br>Renforcement & Réparation",
+    l1text: "Mode Lumière Faible<br>Renforcement & Réparation",
 
     l2num: "80%",
     l2text: "Mode Lumière Moyenne<br>Éclat",
@@ -836,46 +944,55 @@ const translations = {
     l3num: "100%",
     l3text: "Mode Haute Intensité<br>Anti-Rides & Fermeté",
 
-    disclaimer: "*Usage cosmétique uniquement. Les résultats peuvent varier. Ce produit n’est pas destiné à diagnostiquer, traiter, guérir ou prévenir une maladie."
-  },
+    benefitsTitle: "Des bienfaits cosmétiques visibles",
 
+    b1: "Favorise une apparence fraîche et lumineuse",
+    b2: "Aide à améliorer visiblement la douceur et l’élasticité de la peau",
+    b3: "Contribue à un teint plus équilibré et uniforme",
+    b4: "Aide à améliorer l’apparence des peaux sujettes aux imperfections",
+    b5: "Aide à atténuer l’apparence visible des ridules",
+
+    disclaimer: "*Usage cosmétique uniquement. Les résultats individuels peuvent varier. Ce produit n’est pas destiné à diagnostiquer, traiter, guérir ou prévenir une maladie."
+  },
   ar: {
+    product: "منتجات",
     about: "من نحن",
     learn: "تعرف أكثر",
-    learnTitle: "اعرف المزيد",
-    learnIntro: "تم تصميم LUNAVEK بعناية ليوفر الراحة والدقة في روتين العناية اليومية بالبشرة باستخدام أحدث تقنيات الإضاءة LED.",
 
-    f1title: "مصمم لراحة البشرة",
-    f1text: "تم تصنيع قناع Luna Vek من سيليكون مرن وآمن غذائياً ليضمن راحة مثالية للاستخدام التجميلي المتكرر. متوافق مع معايير الجودة العالمية مثل MDSAP وISO 13485 وFDA وCE وFCC وRoHS.",
+    learnTitle: "اعرف المزيد",
+    learnIntro: "تم تصميم LUNAVEK بعناية ليوفر الراحة والدقة في طقوس العناية اليومية بالبشرة — حيث يجمع بين تقنية LED المتقدمة والتصميم الراقي ليرتقي بروتينك الجمالي في المنزل.",
+
+    f1title: "مصمم بعناية لراحة البشرة",
+    f1text: "تم تصنيع قناع Luna Vek LED من سيليكون مرن وآمن غذائيًا لضمان ملاءمة ناعمة ومريحة مناسبة للاستخدام التجميلي المنتظم. يتم إنتاجه وفق أطر الجودة والسلامة المعترف بها عالميًا بما في ذلك MDSAP وISO 13485 وFDA وCE وFCC وRoHS.",
 
     f2title: "طقس ضوئي يومي بسيط",
-    f2text: "عشر دقائق فقط في الجلسة تمنحك تجربة راقية في المنزل وتدعم إشراقة البشرة الطبيعية.",
+    f2text: "عشر دقائق فقط لكل جلسة تمنحك تجربة راقية في المنزل تكمل روتين العناية بالبشرة وتدعم مظهرًا مشرقًا بشكل طبيعي.",
 
     f3title: "تقنية LED رباعية الألوان عالية الدقة",
-    f3text: "يحتوي القناع على 122 مصباح LED عالي الأداء موزعة بدقة لتوفير إضاءة متوازنة ولطيفة على الوجه بالكامل.",
+    f3text: "يحتوي القناع على 122 مصباح LED عالي الأداء موزعة بعناية لتوفير تعرض ضوئي متوازن ولطيف على كامل الوجه لتطبيق تجميلي متقن.",
 
-    modesTitle: "عناية مخصصة للوجه",
-    modesIntro: "6 أوضاع للعناية بالبشرة وثلاثة مستويات سطوع وإضاءة نبضية بتردد 10 هرتز لدعم روتينك التجميلي.",
+    modesTitle: "عناية مخصصة للوجه من أجلك",
+    modesIntro: "6 أوضاع للعناية بالبشرة، وثلاثة مستويات سطوع قابلة للتعديل، وإضاءة نبضية بتردد 10 هرتز مصممة لدعم روتين تجميلي متقدم.",
 
     m1title: "وضع الاستعادة (660nm)",
-    m1text: "يعزز إنتاج الكولاجين ويشد البشرة ويزيد من مرونتها.",
+    m1text: "يعزز تخليق الكولاجين ويشد البشرة ويزيد من مرونتها.",
 
     m2title: "وضع التفتيح (590nm + 660nm)",
-    m2text: "يفتح لون البشرة ويساعد في تفكيك التصبغات.",
+    m2text: "يفتح لون البشرة ويساعد في تقليل مظهر التصبغات.",
 
     m3title: "وضع مقاومة الشيخوخة (660nm + 850nm)",
-    m3text: "ينشط الدورة الدموية ويحسن تدفق الدم ويعزز صحة البشرة.",
+    m3text: "ينشط الدورة الدموية ويحسن تدفق الدم ويدعم حيوية البشرة.",
 
     m4title: "وضع الإصلاح العميق (590nm + 660nm + 850nm)",
-    m4text: "يسرع الأيض ويحسن نسيج البشرة والتصبغات.",
+    m4text: "يسرّع الأيض ويحسن مظهر لون البشرة والتصبغات.",
 
     m5title: "وضع حب الشباب (415nm)",
-    m5text: "يقضي على البكتيريا المسببة لحب الشباب ويقلل الالتهاب والآثار.",
+    m5text: "يستهدف البكتيريا المسببة لحب الشباب ويساعد في تقليل الالتهاب والآثار.",
 
-    m6title: "وضع العناية الليلية (جميع الأضواء)",
-    m6text: "يعزز الكولاجين ويقلل التجاعيد ويساعد على الاسترخاء وتحسين النوم.",
+    m6title: "وضع العناية قبل النوم (جميع الأضواء)",
+    m6text: "يدعم الكولاجين ويقلل مظهر التجاعيد ويساعد على الاسترخاء وتحسين جودة النوم.",
 
-    levelsTitle: "ثلاثة مستويات للسطوع",
+    levelsTitle: "ثلاثة مستويات للتحكم في السطوع",
     levelsIntro: "مضبوطة حسب رغبتك.",
 
     l1num: "50%",
@@ -887,7 +1004,15 @@ const translations = {
     l3num: "100%",
     l3text: "وضع الإضاءة العالية<br>مقاومة التجاعيد وشد البشرة",
 
-    disclaimer: "*للاستخدام التجميلي فقط. قد تختلف النتائج. هذا المنتج غير مخصص لتشخيص أو علاج أو شفاء أو منع أي مرض."
+    benefitsTitle: "فوائد تجميلية يمكنك ملاحظتها",
+
+    b1: "يعزز مظهرًا منعشًا ومشرقًا",
+    b2: "يساعد في تحسين مظهر نعومة ومرونة البشرة",
+    b3: "يدعم مظهرًا أكثر توازنًا وتجانسًا للبشرة",
+    b4: "يساعد في تحسين مظهر البشرة المعرضة للشوائب",
+    b5: "يساعد في تنعيم مظهر الخطوط الدقيقة",
+
+    disclaimer: "*للاستخدام التجميلي فقط. قد تختلف النتائج من شخص لآخر. هذا المنتج غير مخصص لتشخيص أو علاج أو شفاء أو منع أي مرض."
   }
 };
 
@@ -904,40 +1029,58 @@ function toggleLangMenuMobile() {
   langMenuMobile.classList.toggle("active");
 }
 
-function setLang(lang) {
-  localStorage.setItem("lang", lang);
+function applyTranslations(lang){
 
+  if(!translations[lang]) lang = "en";
+
+  // сохраняем глобально
+  localStorage.setItem("language", lang);
+
+  // html атрибуты
   document.documentElement.lang = lang;
   document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
 
-  langBtn.textContent = lang.toUpperCase();
-  langBtnMobile.textContent = lang.toUpperCase();
+  // кнопки языка
+  const btnDesktop = document.getElementById("LangBtn");
+  const btnMobile = document.getElementById("LangBtnMobile");
 
+  if(btnDesktop) btnDesktop.textContent = lang.toUpperCase();
+  if(btnMobile) btnMobile.textContent = lang.toUpperCase();
+
+  // перевод текста
   document.querySelectorAll("[data-i18n]").forEach(el => {
     const key = el.getAttribute("data-i18n");
-    if (translations[lang][key]) {
-      el.innerHTML = translations[lang][key];
+
+    if(translations[lang][key]){
+      el.textContent = translations[lang][key];
     }
   });
-
-  langMenu.classList.remove("active");
-  langMenuMobile.classList.remove("active");
 }
 
-/* Restore saved language */
-(function () {
-  const savedLang = localStorage.getItem("lang") || "en";
-  setLang(savedLang);
-})();
+function setLang(lang){
+  applyTranslations(lang);
 
-/* Close language menus when clicking outside */
-document.addEventListener("click", e => {
-  if (!e.target.closest(".lang-wrapper")) {
-    langMenu.classList.remove("active");
-    langMenuMobile.classList.remove("active");
+  document.getElementById("langMenu")?.classList.remove("active");
+  document.getElementById("langMenuMobile")?.classList.remove("active");
+}
+
+/* INIT — ЗАГРУЗКА ЯЗЫКА ПРИ ОТКРЫТИИ СТРАНИЦЫ */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  let savedLang = localStorage.getItem("language");
+
+  if(!savedLang || !translations[savedLang]){
+    savedLang = "en";
   }
+
+  applyTranslations(savedLang);
 });
+
+
 </script>
+
+
 
 <script>
 document.addEventListener("DOMContentLoaded", function(){
@@ -966,6 +1109,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
 </body>
 </html>
+
 
 
 
