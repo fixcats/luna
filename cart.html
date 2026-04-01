@@ -1125,7 +1125,20 @@ document.addEventListener("DOMContentLoaded", function(){
   }
 
   function updateBadge(){
-    const cart = getCart();
+    let cart = getCart();
+
+cart = cart.map(item => {
+  if (item.id === "lunavek-mask") {
+    return {
+      ...item,
+      price: 349,
+      oldPrice: 399
+    };
+  }
+  return item;
+});
+
+saveCart(cart);
     const total = cart.reduce((sum,i)=> sum + i.qty, 0);
     document.querySelectorAll(".cart-badge").forEach(b=>{
       if(total>0){
@@ -1307,6 +1320,12 @@ document.addEventListener("DOMContentLoaded", function(){
 
     if(existing){
       existing.qty += qty;
+
+      // ОБНОВЛЯЕМ ЦЕНЫ
+      existing.price = product.price;
+      existing.oldPrice = product.oldPrice;
+      existing.image = product.image;
+      existing.name = product.name;
     } else {
       cart.push(product);
     }
