@@ -355,8 +355,34 @@ body.dark .lang-menu button:hover{
 }
 
 .price{
-  font-size:32px;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  flex-wrap:wrap;
+}
+
+.old-price{
+  font-size:24px;
+  font-weight:500;
+  color:var(--muted);
+  text-decoration:line-through;
+  opacity:.8;
+}
+
+.new-price{
+  font-size:36px;
   font-weight:700;
+  color:var(--text);
+  letter-spacing:-0.02em;
+}
+
+.warranty{
+  margin-top:10px;
+  font-size:13px;
+  font-weight:600;
+  letter-spacing:.08em;
+  color:var(--muted);
+  text-transform:uppercase;
 }
 
 .buy-btn{
@@ -680,9 +706,39 @@ body.dark .lang-menu button:hover{
     gap: 12px;
   }
 
-  .price {
-    font-size: 24px;
-  }
+  .price{
+  justify-content:center;
+  gap:10px;
+ }
+
+ .old-price{
+  font-size:18px;
+ }
+
+  .new-price{
+  font-size:28px;
+}
+
+.old-price{
+  font-size:24px;
+  font-weight:500;
+  color:var(--muted);
+  text-decoration:line-through;
+  opacity:.8;
+}
+
+.new-price{
+  font-size:36px;
+  font-weight:700;
+  color:var(--text);
+  letter-spacing:-0.02em;
+}
+
+.warranty{
+  text-align:center;
+  font-size:12px;
+  margin-top:8px;
+}
 
   .buy-btn {
     width: 100%;
@@ -965,7 +1021,14 @@ Designed to elevate your skincare routine with gentle, evenly distributed light 
 
 <div class="buy-row">
 
-<div class="price" data-i18n="price">$290</div>
+<div class="price" data-i18n="price">
+  <span class="old-price">$399</span>
+  <span class="new-price">$349</span>
+</div>
+
+<div class="warranty" data-i18n="warranty">
+  1 Year Warranty Included
+</div>
 
 <!-- QUANTITY SELECTOR -->
 <div class="qty-selector">
@@ -1159,7 +1222,8 @@ fr: {
 
   productTitle:"Masque Facial LED LunaVEK",
   productSubtitle:"Conçu pour sublimer votre routine de soins grâce à une technologie lumineuse douce et uniformément répartie.",
-  price:"$290",
+  price:'<span class="old-price">$399</span><span class="new-price">$349</span>',
+  warranty:"Garantie 1 an incluse",
   addToCart:"Ajouter au panier",
   buyNow:"Acheter maintenant",
 
@@ -1209,7 +1273,8 @@ ar: {
 
   productTitle:"قناع لوناڤيك LED للوجه",
   productSubtitle:"مصمم لرفع مستوى روتين العناية بالبشرة باستخدام تقنية إضاءة لطيفة ومتوازنة.",
-  price:"$290",
+  price:'<span class="old-price">$399</span><span class="new-price">$349</span>',
+  warranty:"ضمان لمدة سنة مشمول",
   addToCart:"أضف إلى السلة",
   buyNow:"اشتري الآن",
 
@@ -1429,6 +1494,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
 </body>
 </html>
+
 
 
 
