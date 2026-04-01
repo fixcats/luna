@@ -1209,9 +1209,16 @@ document.addEventListener("DOMContentLoaded", function(){
     </div>
 
     <div class="cart-item-price">
-      $${item.price * item.qty}
+      ${item.oldPrice ? `
+        <span style="text-decoration:line-through;opacity:.5;margin-right:8px;">
+          $${item.oldPrice * item.qty}
+        </span>
+      ` : ""}
+  
+     $${item.price * item.qty}
+
       <button class="remove-btn" onclick="removeItem(${index})">
-        <i class="fa-regular fa-trash-can"></i>
+          <i class="fa-regular fa-trash-can"></i>
       </button>
     </div>
   </div>
@@ -1284,13 +1291,15 @@ document.addEventListener("DOMContentLoaded", function(){
 
   addBtn.addEventListener("click", ()=>{
 
-    const product = {
-      id: "lunavek-mask",
-      name: "LunaVEK LED Facial Mask",
-      price: 290,
-      qty: qty,
-      image: "product1.jpg"
-    };
+      const product = {
+    id: "lunavek-mask",
+    name: "LunaVEK LED Facial Mask",
+    oldPrice: 399,
+    price: 349,
+    qty: qty,
+    image: "product1.jpg",
+    warranty: "1 Year Warranty"
+  };
 
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
